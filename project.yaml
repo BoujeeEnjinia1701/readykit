@@ -1,0 +1,17 @@
+# Card metadata consumed by https://designmolecule.com
+name: ReadyKit
+slug: readykit
+area: Open Engineering
+status: concept          # concept | design | prototype | tested | released
+shortlisted: false
+pitch: >-
+  The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
+problem: >-
+  Small hardware teams and open projects rarely document requirements, decisions and readiness consistently, so work is hard to review, reproduce or fund.
+budget_usd: 0
+difficulty: 2  # 1 easiest, 5 hardest
+hero_image: media/hero.png
+licenses:
+  hardware: CERN-OHL-S-2.0
+  software: MIT
+tags: [open-engineering, open-hardware, cern-ohl-s]
