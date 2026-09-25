@@ -1,7 +1,10 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
-Document control front matter and checker,,,,,,
-TRL gating rules and badge,,,,,,
-Concept render and drawing scripts,,,,,,
-PDF rendering with house style,,,,,,
-Agent guardrail files,,,,,,
-Template repository,,,,,,
+1 Document control checker,1,"Front matter fields, doc ID pattern, version and revision rows, status, em dash scan (render.py --check)",Self (MIT),0.00,make,Exists in .kit/render.py; shown as the document set in the exploded view
+2 PDF renderer and house style,1,"Markdown to HTML to PDF (Python-Markdown, Jinja2, WeasyPrint), CSS, cover with document control table, status band",Self (MIT); WeasyPrint (BSD),0.00,make,Exists; branding is hard-coded and must become configurable
+3 Drawing sheet generator,1,"ANSI B sheet, title block, revision table, third-angle symbol, blueprint theme (drawing.py)",Self (MIT),0.00,make,Exists; ANSI B only; ISO A-series sheets proposed
+4 Concept media renderer,1,"build123d massing to hero, exploded, cutaway, blueprint, GLB and viewer page (concept.py)",Self (MIT); build123d (Apache-2.0),0.00,make,Exists; numpy z-buffer renderer needs no GPU
+5 TRL gate and badge,1,"TRL evidence rules 1 to 6, portfolio phase cap, media presence check; badge on PDF cover",Self (MIT),0.00,make,Exists; README badge is still hand-written
+6 Agent guardrails,1,"CLAUDE.md template, PHASE.yaml, slash commands (populate, advance-trl3, rein-in, refresh-media)",Self (MIT),0.00,make,Exists; decision-language check not yet automated
+7 Template repository and CI workflow,1,"Folder layout, licenses, controlled-doc template, GitHub Actions docs.yml",Self (MIT); GitHub template repository,0.00,make,Exists as per-repo scaffold; standalone template not yet published
+8 Bundled fonts,1,IBM Plex Sans and Mono,IBM (SIL OFL 1.1),0.00,buy,Free; license text in .kit/fonts/OFL.txt
+9 CI hosting,1,GitHub Actions on public repositories,GitHub,0.00,buy,Free for public repositories; private repositories use included minutes

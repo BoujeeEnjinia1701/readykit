@@ -6,13 +6,21 @@
 
 The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
 
+![ReadyKit concept](media/hero.png)
+
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+
 ## Concept rationale
 
-The method that moved the lab's portfolio to TRL 3 is itself reusable; publishing it lets others adopt the same discipline.
+The method that moved the lab's portfolio toward TRL 3 is itself reusable. Every repository keeps its documents as Markdown with version-controlled front matter and its geometry as build123d Python, and one checker refuses a TRL claim unless the evidence files exist. Publishing that kit as a standalone tool lets other teams adopt the same discipline without inventing their own templates, and it keeps the portfolio's method open to review.
+
+It stays open and garage-friendly because it needs nothing but Python and Git: no CAD license, no GPU, no paid service, and it runs offline on an ordinary laptop. Plain text means every change to a requirement or a drawing shows up in a diff that anyone can review.
 
 ## Burning platform
 
-Open hardware projects are often abandoned or unusable because the documentation needed to build, review or certify them is missing.
+Open hardware often cannot be rebuilt from what is published. In a study of 132 open source hardware products, only 11 (8%) shared all eight documentation elements the authors assessed, and the average was 4.2 of 8 ([Bonvoisin et al. 2017](https://doi.org/10.5334/joh.7)). In a *Nature* survey of about 1,500 researchers, more than 70% had tried and failed to reproduce another scientist's experiment ([Baker 2016](https://www.nature.com/articles/533452a)).
+
+At the same time, public funders expect openness and a stated readiness level. The UNESCO Recommendation on Open Science, adopted by 193 countries in November 2021, covers sharing of hardware as well as publications and data ([UNESCO](https://www.unesco.org/en/articles/unesco-sets-ambitious-international-standards-open-science)), and Horizon Europe calls are framed in Technology Readiness Levels ([Horizon Europe NCP portal](https://horizoneuropencpportal.eu/sites/default/files/2022-12/trl-assessment-tool-guide-final.pdf)). Small teams need a cheap way to meet both expectations.
 
 ## Where it could be used
 
@@ -20,17 +28,27 @@ Open hardware projects are often abandoned or unusable because the documentation
 
 | Industry | Use |
 | --- | --- |
-| _To be developed_ | |
+| University research labs | Controlled documents and TRL evidence for lab-built instruments, theses and grant reports |
+| Open science hardware | Rebuildable documentation for shared instruments, with a readiness level other labs can trust |
+| Hardware startups | TRL claims tied to evidence for grant and accelerator applications |
+| Engineering education | Student design teams learn document control, revisions and drawings on real projects |
+| Makerspaces and fab labs | A standard repo layout for community projects so others can build and maintain them |
+| Nonprofit and humanitarian engineering | Designs handed to local partners with clear status, safety notes and "not for fabrication" marking |
 
 ### By country or region
 
 | Country or region | Why it matters there |
 | --- | --- |
-| _To be developed_ | |
+| European Union | Horizon Europe frames calls in TRLs, so applicants need evidence for the level they claim ([NCP portal](https://horizoneuropencpportal.eu/sites/default/files/2022-12/trl-assessment-tool-guide-final.pdf)) |
+| Germany | DIN published DIN SPEC 3105 on open hardware documentation in 2020 ([Journal of Open Hardware](https://journalopenhw.medium.com/din-spec-3105-explained-2cce6134c207)), and the Prototype Fund supports individuals and small teams building open hardware ([Prototype Fund Hardware](https://hardware.prototypefund.de/en/about-2/)) |
+| United States | The TRL scale comes from NASA ([NASA](https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/)), and a 2022 White House memo requires public access to the results of federally funded research ([OSTP](https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/08/08-2022-OSTP-Public-Access-Memo.pdf)) |
+| Ghana and West Africa | The first Africa Open Science Hardware summit met in Kumasi in April 2018 ([Open AIR](https://openair.africa/historic-gathering-of-africas-open-science-hardware-osh-innovators-the-africaosh-summit-kumasi-ghana/)); a free, offline tool suits labs with limited budgets and bandwidth |
+| Argentina and Latin America | The reGOSH network runs open hardware residencies, such as Mendoza in 2022 ([reGOSH](https://regosh.libres.cc/en/residencies/residency-mendoza-2022/)), where shared documentation lets projects move between labs |
+| India | Large numbers of student engineering teams and makerspaces could use a free template to document projects to a common standard |
 
 ## What sparked the idea
 
-It came out of a September 2026 review of Design Molecule's applied research areas against the open projects already in the lab. The kit was built for this portfolio and is the lab's open engineering practice in concrete form.
+It came out of a September 2026 review of Design Molecule's applied research areas against the open projects already in the lab. The kit was built for this portfolio and is the lab's open engineering practice in concrete form. The trigger was practical: bringing dozens of repositories to TRL 2 and 3 at once, with AI agents drafting much of the work, showed that written rules alone drift, and that an automatic check on every push kept the documents consistent.
 
 ## Problem
 
@@ -40,18 +58,27 @@ Small hardware teams and open projects rarely document requirements, decisions a
 
 The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
 
-Full design precis: [docs/02-concept.md](docs/02-concept.md)
+Authors write documents in Markdown with YAML front matter and geometry in build123d Python. One command checks every document and the claimed TRL against the evidence in the repository, and CI blocks a merge when the check fails. A second command renders branded PDFs, drawing sheets and concept media. Measured on one sample repository, the check takes about 0.1 s and the full render about 7 s on a 2-core machine.
+
+![Documentation pipeline](media/flow.png)
+
+Full design precis: [docs/02-concept.md](docs/02-concept.md). Requirements, including the ones not yet met (check coverage, Windows support, configurable branding, one-command upgrades and a getting-started guide): [docs/03-requirements.md](docs/03-requirements.md).
+
+A passing check means the documents are complete and consistent. It does not mean a design is safe or fit for use.
 
 ## Key components
 
-- Document control front matter and checker
-- TRL gating rules and badge
-- Concept render and drawing scripts
-- PDF rendering with house style
-- Agent guardrail files
-- Template repository
+Numbered as in the exploded view and the bill of materials.
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv).
+1. Document control checker
+2. PDF renderer and house style
+3. Drawing sheet generator
+4. Concept media renderer
+5. TRL gate and badge
+6. Agent guardrails
+7. Template repository and CI workflow
+
+The working bill of materials is in [bom/bom.csv](bom/bom.csv). Every line costs $0: the modules are MIT and the dependencies are free and open source.
 
 ## Repository layout
 
