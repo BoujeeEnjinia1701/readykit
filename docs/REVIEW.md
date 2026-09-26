@@ -222,3 +222,10 @@ Amish wrote on 2026-09-26: "apply the same MIT license pairing across the board 
 - Controlled documents, `license` field back to CERN-OHL-S-2.0 and version bumped: RDK-PRB-001 v0.4, RDK-PRC-001 v0.5 (design choice 5 rewritten), RDK-REQ-001 v0.5, RDK-CAL-001 v0.3, RDK-DDR-001 v0.3 (D5 row marked superseded), RDK-DDR-002 v0.2 (reversal recorded).
 - Drawings and media: RDK-DWG-001 Rev P3 and blueprint RDK-DWG-010 Rev P3 with CERN-OHL-S-2.0 in the title block. The `drawing.Sheet` subclass workaround in `cad/src/concept_media.py` was removed, which also closes kit finding 3 above. Drawings, media and PDFs regenerated; temporary `_views` folders deleted.
 - Check: the only remaining mentions of the content license are the historical text in RDK-DDR-001, RDK-DDR-002 and this note, plus the kit's own `.kit/STANDARDS.md` front matter, which is shared, unchanged kit content identical in every repo.
+
+## Session 2026-09-26: photoreal renders
+
+Amish asked on 2026-09-26 for photoreal renders across the portfolio, starting with the software and playbook repos (Group C). This repo has no new product model: the existing concept scene from `cad/src/concept_media.py` was rendered with Blender Cycles (`.kit/scene_export.py`, `.kit/photoreal.py`) on Amish's Mac and captioned with the project, repository and viewing direction.
+
+- New: `media/render-hero.png`. The README now leads with `media/render-hero.png`.
+- Geometry, BOM, calculations and drawings are unchanged. `trl` stays 3; TRL 4 remains on hold.

@@ -6,7 +6,7 @@
 
 The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
 
-![ReadyKit concept](media/hero.png)
+![ReadyKit: documentation and readiness kit for open hardware, photoreal render](media/render-hero.png)
 
 [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/RDK-DWG-001.pdf) · [Calculation note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
