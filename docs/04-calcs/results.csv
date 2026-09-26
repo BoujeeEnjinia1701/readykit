@@ -1,0 +1,28 @@
+tag,value,line
+A1,1.05,Vendored kit folder: 1.05 MB in 18 files; fonts 0.99 MB (94%)
+A2,808,"Kit source: concept.py 282, drawing.py 300, render.py 226; total 808 lines of Python"
+A3,85,"Project codes in STANDARDS.md section 7: 85 (plus OHP, portfolio-wide)"
+A4,13,"Hard-coded identity strings in kit code, style and templates: 13 occurrences of 4 identity values: amishchadha.com x3 (drawing.py, doc.html.j2); BoujeeEnjinia1701 x1 (render.py); Amish Chadha x4 (drawing.py, concept.py, controlled-doc.md); Open Hardware Portfolio x5 (drawing.py, concept.py, doc.html.j2, doc.css)"
+B1,0.10,"Check, this repository (5 controlled documents): median 0.10 s of 7 runs, exit 0"
+B2,0.08,"Python start-up plus the check's imports alone: 0.08 s, so the checking itself takes about 22 ms"
+B3,0.6,"Check time against document count: 10 docs 0.11 s, 100 docs 0.16 s, 400 docs 0.35 s; slope 0.6 ms per document; 2 s budget reached at about 3093 documents"
+B4,0.10,"Corpus /home/claude/trl3: 38 repositories at TRL 3, 5 to 8 controlled documents each; check median 0.10 s, max 0.12 s"
+B5,0,Corpus check failures: 0 of 38
+B6,1,Corpus repositories with warnings: 1 of 38
+B7,0,"Kit drift: kit code identical to this repo's in 38 of 38 corpus repositories; STANDARDS.md identical in 0 of 38, although all carry KIT_VERSION 1.3.1; this repo's standard lists 38 project codes that WasteWise-ml's does not (0 the other way)"
+C1,1.8,"PDF render, waterwatch copy, 5 controlled documents: 3.0 s and 3.0 s (check included); about 0.60 s per document, so about 1.8 s for three documents"
+C2,31,"Pages rendered: 31, about 0.10 s per page"
+C3,5,Reproducibility: extracted text identical in 5 of 5 PDFs across two renders
+C4,True,"Offline (network namespace with no interfaces): check passes, render passes"
+D1,5.2,"Concept media, this repository (7 modules plus laptop, hero, exploded, blueprint, GLB, flow): 5.2 s, exit 0"
+D2,12.1,"Concept media, 20-part model with cutaway and scale figure: 12.0 s and 12.1 s (target 60 s)"
+D3,4,Reproducibility: 4 of 4 PNG images byte-identical across two runs
+E1,12,Seeded faults detected: 12 of 20 rules (60%); TRL 2 audit claimed 12; mismatches with the audit: 0
+E2,6,Rules needed for the 90% target: 18 of 20; gap 6 rules
+E3,2,Guardrail probes (R13): TRL above the cap caught; Work beyond the cap (a TST folder) caught; Decision recorded as made without an owner missed
+F1,0.00,"BOM: 11 lines, 0 unpriced, total $0.00 against budget_usd $0.00"
+F2,8,Direct dependencies (8): pyyaml 6.0.3 MIT License; markdown 3.10.2 BSD-3-Clause; jinja2 3.1.6 BSD License; weasyprint 70.0 BSD License; cairosvg 2.9.1 LGPL-3.0-or-later; build123d 0.13.0 Apache Software License; numpy 2.4.4 BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0; matplotlib 3.10.9 Python Software Foundation License
+F3,1,Direct dependencies with a copyleft license: cairosvg; all are free of charge and OSI-approved or equivalent
+F4,3,"Open Know-How manifest 1.0 required fields available from project.yaml: 3 of 5; missing: manifest-author name, project-link or documentation-home"
+F5,1,"Sheet sizes the drawing generator supports: 1 (ANSI B, fixed module constants W, H)"
+F6,33,"Fresh virtual environment plus pip install of the kit requirements: 33 s, exit 0, 1.09 GB installed; check then passes: True (system libraries for WeasyPrint were already present)"

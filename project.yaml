@@ -2,12 +2,23 @@
 name: ReadyKit
 slug: readykit
 area: Open Engineering
-trl: 2                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
+trl: 3                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
 trl_target: 3
 trl_evidence:
   - docs/01-problem.md
   - docs/02-concept.md
   - docs/03-requirements.md
+  - docs/decisions/0001-trl2-review-decisions.md
+  - docs/04-calcs/01-sizing.md
+  - docs/04-calcs/sizing.py
+  - docs/04-calcs/results.csv
+  - cad/src/model.py
+  - cad/step/readykit-massing.step
+  - cad/stl/readykit-massing.stl
+  - cad/src/sheets.py
+  - cad/drawings/RDK-DWG-001.svg
+  - cad/drawings/RDK-DWG-001.pdf
+  - bom/bom.csv
 shortlisted: false
 pitch: >-
   The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.

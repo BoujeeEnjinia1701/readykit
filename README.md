@@ -1,14 +1,14 @@
 # ReadyKit
 
-![TRL 2](https://img.shields.io/badge/TRL-2%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Open Engineering · **TRL:** 2 of 9 (concept formulated) · **Prototype budget:** software only · **Difficulty:** 2 of 5
+**Area:** Open Engineering · **TRL:** 3 of 9 (proof of concept) · **Prototype budget:** software only · **Difficulty:** 2 of 5
 
 The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
 
 ![ReadyKit concept](media/hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/RDK-DWG-001.pdf) · [Calculation note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -44,7 +44,7 @@ At the same time, public funders expect openness and a stated readiness level. T
 | United States | The TRL scale comes from NASA ([NASA](https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/)), and a 2022 White House memo requires public access to the results of federally funded research ([OSTP](https://bidenwhitehouse.archives.gov/wp-content/uploads/2022/08/08-2022-OSTP-Public-Access-Memo.pdf)) |
 | Ghana and West Africa | The first Africa Open Science Hardware summit met in Kumasi in April 2018 ([Open AIR](https://openair.africa/historic-gathering-of-africas-open-science-hardware-osh-innovators-the-africaosh-summit-kumasi-ghana/)); a free, offline tool suits labs with limited budgets and bandwidth |
 | Argentina and Latin America | The reGOSH network runs open hardware residencies, such as Mendoza in 2022 ([reGOSH](https://regosh.libres.cc/en/residencies/residency-mendoza-2022/)), where shared documentation lets projects move between labs |
-| India | Large numbers of student engineering teams and makerspaces could use a free template to document projects to a common standard |
+| India | The Atal Innovation Mission reports 10,000 Atal Tinkering Labs and 72 Atal Incubation Centres ([AIM](https://aim.gov.in/)); student teams and incubated startups could use a free template to document projects to a common standard |
 
 ## What sparked the idea
 
@@ -58,11 +58,11 @@ Small hardware teams and open projects rarely document requirements, decisions a
 
 The lab's documentation and readiness kit released as an open tool: document control, technology readiness level gating, concept renders, drawings and branded PDFs from plain Markdown and Python, usable by any hardware team.
 
-Authors write documents in Markdown with YAML front matter and geometry in build123d Python. One command checks every document and the claimed TRL against the evidence in the repository, and CI blocks a merge when the check fails. A second command renders branded PDFs, drawing sheets and concept media. Measured on one sample repository, the check takes about 0.1 s and the full render about 7 s on a 2-core machine.
+Authors write documents in Markdown with YAML front matter and geometry in build123d Python. One command checks every document and the claimed TRL against the evidence in the repository, and CI blocks a merge when the check fails. A second command renders branded PDFs, drawing sheets and concept media. Measured on a 2-core machine ([RDK-CAL-001](docs/04-calcs/01-sizing.md)), the check takes about 0.1 s per repository, PDFs take 0.6 to 1.0 s per document, and concept media for a 20-part model take 12 to 23 s. Across 38 finished portfolio repositories the check raised no false failures.
 
 ![Documentation pipeline](media/flow.png)
 
-Full design precis: [docs/02-concept.md](docs/02-concept.md). Requirements, including the ones not yet met (check coverage, Windows support, configurable branding, one-command upgrades and a getting-started guide): [docs/03-requirements.md](docs/03-requirements.md).
+Full design precis: [docs/02-concept.md](docs/02-concept.md). Requirements, including the eight not yet met (check coverage, configurable branding, one-command upgrades, the decision-wording guardrail, a getting-started guide, Open Know-How export, ISO A3 sheets and a single command): [docs/03-requirements.md](docs/03-requirements.md). The checker catches 12 of the standard's 20 machine-checkable rules; the target is 18. The general arrangement sheet [RDK-DWG-001](cad/drawings/RDK-DWG-001.pdf) lays out the pipeline, and decisions are in [RDK-DDR-001](docs/decisions/0001-trl2-review-decisions.md).
 
 A passing check means the documents are complete and consistent. It does not mean a design is safe or fit for use.
 
@@ -78,7 +78,7 @@ Numbered as in the exploded view and the bill of materials.
 6. Agent guardrails
 7. Template repository and CI workflow
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv). Every line costs $0: the modules are MIT and the dependencies are free and open source.
+The working bill of materials is in [bom/bom.csv](bom/bom.csv). Every line costs $0 against a budget of $0: the modules are MIT and the dependencies are free and open source.
 
 ## Repository layout
 
