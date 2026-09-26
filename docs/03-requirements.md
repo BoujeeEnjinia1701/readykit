@@ -3,11 +3,11 @@ doc_id: RDK-REQ-001
 title: ReadyKit requirements
 project: ReadyKit
 doc_type: Requirements
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
-license: CC-BY-SA-4.0
+license: CERN-OHL-S-2.0
 revisions:
 - version: "0.1"
   date: '2026-09-25'
@@ -25,6 +25,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.5"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: D5 reversed by Amish (RDK-DDR-002); license back to CERN-OHL-S-2.0
 ---
 
 # ReadyKit requirements

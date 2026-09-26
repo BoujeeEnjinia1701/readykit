@@ -3,11 +3,11 @@ doc_id: RDK-PRC-001
 title: ReadyKit design precis
 project: ReadyKit
 doc_type: Design precis
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
-license: CC-BY-SA-4.0
+license: CERN-OHL-S-2.0
 revisions:
 - version: "0.1"
   date: '2026-09-25'
@@ -25,6 +25,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.5"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: D5 reversed by Amish (RDK-DDR-002); license back to CERN-OHL-S-2.0; design choice 5 rewritten
 ---
 
 # ReadyKit design precis
@@ -93,7 +97,7 @@ Each choice below is decided by Amish, 2026-09-25: go with recommendation (RDK-D
 2. **Identity and branding (D2).** Organization name, website, repository owner, author and colors move into `readykit.yaml`, with Design Molecule values as the default (R11).
 3. **Sheet sizes (D3).** ISO A3 (420 x 297 mm) is to be added beside ANSI B (431.8 x 279.4 mm) (R17). The parametric model already takes the sheet size as a parameter; the kit's sheet generator change is on hold with the rest of the build.
 4. **Command-line interface (D4).** One `readykit` command with `init`, `check`, `render`, `media` and `upgrade`, keeping the scripts as thin wrappers so existing repositories keep working (R18).
-5. **Licensing of the tool (D5).** Code under MIT and non-code content (documents, drawings, CAD, BOM and media) under CC BY-SA 4.0, matching the standard. Applied on 2026-09-25: `LICENSE` holds the CC BY-SA 4.0 legal code, `LICENSE-SOFTWARE` stays MIT, and every controlled document and drawing title block carries CC-BY-SA-4.0.
+5. **Licensing of the tool (D5).** The portfolio license pair, as on every other repo: hardware and non-code content (documents, drawings, CAD, BOM and media) under CERN-OHL-S v2 (`LICENSE`) and software under MIT (`LICENSE-SOFTWARE`). The separate content license adopted under D5 on 2026-09-25 was reversed by Amish on 2026-09-26 for consistency across the portfolio (RDK-DDR-002); every controlled document and drawing title block carries CERN-OHL-S-2.0 again.
 6. **Relationship to existing standards (D6).** Export an Open Know-How 1.0 manifest (`okh.yml`) from the same metadata (R16). Three of its five required fields (title, description, license) already exist in `project.yaml`; the manifest author and the project link come from `readykit.yaml`. A DIN SPEC 3105 checklist is not adopted.
 7. **TRL 3 evidence for a software project (D7).** The parametric model exports the illustrative massing as STEP and STL, the general arrangement sheet shows the pipeline layout, and the calculation note measures speed and coverage. This keeps the standard's evidence rule unchanged for software.
 

@@ -147,11 +147,12 @@ def main():
     L.append(_t(16, 209.5, "Dashed boundary: one project repository (item 7). Modules 1 to 5 live in its .kit/ folder today (vendored, kit 1.3.1).",
                 2.1, 400, MUTED))
 
-    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P2", license="CC-BY-SA-4.0",
-                     author="Amish Chadha", date=DATE, scale=None, units="mm (iso view)", theme="technical",
+    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P3", license="CERN-OHL-S-2.0",
+                     author="Amish Chadha", date="2026-09-26", scale=None, units="mm (iso view)", theme="technical",
                      material="Software; nothing to fabricate. Massing is illustrative. PRELIMINARY, NOT FOR FABRICATION",
                      revisions=[("P1", "Preliminary GA for TRL 3 (pipeline layout, cad/src/model.py)", DATE, "AC"),
-                               ("P2", "Recommendations accepted (DDR-002): CC-BY-SA-4.0; D1, D3 decided", DATE, "AC")])
+                               ("P2", "Recommendations accepted (DDR-002): D5 content license; D1, D3 decided", DATE, "AC"),
+                               ("P3", "D5 reversed (DDR-002): back to CERN-OHL-S-2.0", "2026-09-26", "AC")])
     s._layers += L
     work = ROOT / "cad" / "drawings" / "_views"
     iso = safe_iso(assembly(), work)

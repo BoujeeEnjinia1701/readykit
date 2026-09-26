@@ -1,6 +1,6 @@
 # ReadyKit
 
-![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Content: CC BY-SA 4.0](https://img.shields.io/badge/content-CC%20BY--SA%204.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
 **Area:** Open Engineering · **TRL:** 3 of 9 (proof of concept) · **Prototype budget:** software only · **Difficulty:** 2 of 5
 
@@ -98,9 +98,15 @@ The working bill of materials is in [bom/bom.csv](bom/bom.csv). Every line costs
 
 Controlled documents follow the portfolio [documentation standard](.kit/STANDARDS.md). Each carries a document ID (RDK-PRC-001 for the precis), a version and a revision history. Branded PDFs are built with `python .kit/render.py` and attached to GitHub Releases when a document is tagged, for example `RDK-PRC-001/v1.0`.
 
+## Credits
+
+Designed by Amish Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
+
+AI assistance (Claude) was used to accelerate concept renders, prototype documentation and first-pass sizing calculations. Design direction and all decisions are Amish Chadha's, recorded in this repository's decision records (`docs/decisions/`).
+
 ## Licenses
 
-- **Documents, drawings, CAD, BOM and media**: [CC BY-SA 4.0](LICENSE) (RDK-DDR-002, D5)
+- **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
 A project of the [Design Molecule](https://designmolecule.com) lab.

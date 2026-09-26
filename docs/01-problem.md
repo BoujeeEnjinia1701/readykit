@@ -3,11 +3,11 @@ doc_id: RDK-PRB-001
 title: ReadyKit problem statement
 project: ReadyKit
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
-license: CC-BY-SA-4.0
+license: CERN-OHL-S-2.0
 revisions:
 - version: "0.1"
   date: '2026-09-25'
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002)
+- version: "0.4"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: D5 reversed by Amish (RDK-DDR-002); license back to CERN-OHL-S-2.0; constraint line describes the portfolio license pair
 ---
 
 # ReadyKit problem statement
@@ -61,7 +65,7 @@ The kit was built for the Design Molecule open hardware portfolio of about 85 pr
 - Runs on a normal laptop with Python 3.11 or later; no GPU and no CAD license needed.
 - Plain text in Git as the source of truth (Markdown, YAML, Python), so every change is reviewable in a diff.
 - Works offline, except for installing packages and the 3D viewer page, which loads its viewer script from a public CDN.
-- Open licenses throughout: code MIT; documents, drawings, CAD, BOM and media CC BY-SA 4.0, as the standard itself uses (RDK-DDR-002); fonts SIL OFL.
+- Open licenses throughout: the portfolio pair used on every repo, CERN-OHL-S v2 for hardware and non-code content (documents, drawings, CAD, BOM and media) and MIT for software (RDK-DDR-002); fonts SIL OFL.
 
 ## Out of scope at this stage
 

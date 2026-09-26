@@ -201,8 +201,8 @@ Not done here; listed for the owners of the other repositories.
 
 1. **Kit source (shared `.kit/`):** bump KIT_VERSION. The site switch changed 3 lines of kit code and the project-code table changed `STANDARDS.md`, both at version 1.3.1 (RDK-CAL-001, B7 and B8).
 2. **Kit source:** D2 (`readykit.yaml`), D3 (ISO A3 in `drawing.py`), D4 (`readykit` command), D8 (six or more new checks) and the R13 wording check belong in the kit, not in this repository. Decided, but on hold with TRL 4.
-3. **Kit source:** `concept.render_all` has no license argument, so `cad/src/concept_media.py` sets the blueprint license through a subclass of `drawing.Sheet`. A `license` argument in the kit would remove the workaround.
-4. **Website (designmolecule.com card):** ReadyKit's `licenses.hardware` now reads CC-BY-SA-4.0. The key name was kept so the card still parses; the site may want to label it "content" for software projects.
+3. **Kit source:** `concept.render_all` has no license argument, so `cad/src/concept_media.py` sets the blueprint license through a subclass of `drawing.Sheet`. A `license` argument in the kit would remove the workaround. *Update 2026-09-26: the workaround was removed when D5 was reversed; the kit default license applies.*
+4. **Website (designmolecule.com card):** ReadyKit's `licenses.hardware` now reads CC-BY-SA-4.0. The key name was kept so the card still parses; the site may want to label it "content" for software projects. *Update 2026-09-26: back to CERN-OHL-S-2.0 after D5 was reversed; no website change needed.*
 
 ### Safety concerns
 
@@ -211,3 +211,14 @@ No change. A passing check is not an engineering review, and the future safety-n
 ### TRL 4
 
 TRL 4 remains on hold by Amish's instruction. No package, command, exporter, check, test, trial or purchase was started. `trl: 3`, `trl_target: 3`.
+
+## Session 2026-09-26: D5 license change reversed
+
+Amish wrote on 2026-09-26: "apply the same MIT license pairing across the board for all repos." D5 reversed: decided by Amish, 2026-09-26. Keep the portfolio license pair (CERN-OHL-S v2 and MIT) on every repo for consistency. ReadyKit now matches every other repo: hardware and non-code content under CERN-OHL-S v2 (`LICENSE`), software under MIT (`LICENSE-SOFTWARE`).
+
+- `LICENSE`: CC BY-SA 4.0 legal code replaced by the CERN-OHL-S v2 text, copied verbatim from `fieldnode/LICENSE`.
+- `project.yaml`: `licenses.hardware` back to CERN-OHL-S-2.0; tag `cern-ohl-s` restored in place of `cc-by-sa`. `budget_usd`, `trl: 3` and `trl_target: 3` unchanged.
+- `README.md` badge and Licenses section, `CONTRIBUTING.md` and `bom/bom.csv` line 7 restored to the portfolio wording.
+- Controlled documents, `license` field back to CERN-OHL-S-2.0 and version bumped: RDK-PRB-001 v0.4, RDK-PRC-001 v0.5 (design choice 5 rewritten), RDK-REQ-001 v0.5, RDK-CAL-001 v0.3, RDK-DDR-001 v0.3 (D5 row marked superseded), RDK-DDR-002 v0.2 (reversal recorded).
+- Drawings and media: RDK-DWG-001 Rev P3 and blueprint RDK-DWG-010 Rev P3 with CERN-OHL-S-2.0 in the title block. The `drawing.Sheet` subclass workaround in `cad/src/concept_media.py` was removed, which also closes kit finding 3 above. Drawings, media and PDFs regenerated; temporary `_views` folders deleted.
+- Check: the only remaining mentions of the content license are the historical text in RDK-DDR-001, RDK-DDR-002 and this note, plus the kit's own `.kit/STANDARDS.md` front matter, which is shared, unchanged kit content identical in every repo.

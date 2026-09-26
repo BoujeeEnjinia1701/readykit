@@ -28,7 +28,7 @@ problem: >-
 budget_usd: 0
 difficulty: 2  # 1 easiest, 5 hardest
 hero_image: media/hero.png
-licenses:               # RDK-DDR-002, D5: non-code content (documents, drawings, CAD, BOM, media) under CC BY-SA 4.0
-  hardware: CC-BY-SA-4.0
+licenses:
+  hardware: CERN-OHL-S-2.0
   software: MIT
-tags: [open-engineering, open-hardware, cc-by-sa]
+tags: [open-engineering, open-hardware, cern-ohl-s]
