@@ -103,4 +103,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Documents, drawings, CAD, BOM and media**: [CC BY-SA 4.0](LICENSE) (RDK-DDR-002, D5)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-A project of the [Design Molecule](https://designmolecule.com) lab. Gap-filling areas set.
+A project of the [Design Molecule](https://designmolecule.com) lab.
