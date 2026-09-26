@@ -1,6 +1,6 @@
 # ReadyKit
 
-![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Content: CC BY-SA 4.0](https://img.shields.io/badge/content-CC%20BY--SA%204.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
 **Area:** Open Engineering · **TRL:** 3 of 9 (proof of concept) · **Prototype budget:** software only · **Difficulty:** 2 of 5
 
@@ -12,7 +12,7 @@ The lab's documentation and readiness kit released as an open tool: document con
 
 ## Concept rationale
 
-The method that moved the lab's portfolio toward TRL 3 is itself reusable. Every repository keeps its documents as Markdown with version-controlled front matter and its geometry as build123d Python, and one checker refuses a TRL claim unless the evidence files exist. Publishing that kit as a standalone tool lets other teams adopt the same discipline without inventing their own templates, and it keeps the portfolio's method open to review.
+The lab's documentation method is itself reusable. Every repository keeps its documents as Markdown with version-controlled front matter and its geometry as build123d Python, and one checker refuses a TRL claim unless the evidence files exist. Publishing that kit as a standalone tool lets other teams adopt the same discipline without inventing their own templates, and it keeps the portfolio's method open to review.
 
 It stays open and garage-friendly because it needs nothing but Python and Git: no CAD license, no GPU, no paid service, and it runs offline on an ordinary laptop. Plain text means every change to a requirement or a drawing shows up in a diff that anyone can review.
 
@@ -48,7 +48,7 @@ At the same time, public funders expect openness and a stated readiness level. T
 
 ## What sparked the idea
 
-It came out of a September 2026 review of Design Molecule's applied research areas against the open projects already in the lab. The kit was built for this portfolio and is the lab's open engineering practice in concrete form. The trigger was practical: bringing dozens of repositories to TRL 2 and 3 at once, with AI agents drafting much of the work, showed that written rules alone drift, and that an automatic check on every push kept the documents consistent.
+The starting point was a 1999 report by the U.S. General Accounting Office, *Best Practices: Better Management of Technology Development Can Improve Weapon System Outcomes* ([GAO/NSIAD-99-162](https://www.gao.gov/products/nsiad-99-162)). It recommended that the Department of Defense assess technology maturity DoD-wide with a disciplined, knowledge-based method such as Technology Readiness Levels, and commit to a program's cost, schedule and performance baseline only once key technologies reached a level analogous to TRL 7. The point that carries over is that a readiness level is only as good as the evidence behind it. ReadyKit brings that rule down to the scale of a garage team: the checker refuses a TRL claim in `project.yaml` unless the evidence files for that level exist in the repository, so the claim and its proof travel together.
 
 ## Problem
 
@@ -62,7 +62,7 @@ Authors write documents in Markdown with YAML front matter and geometry in build
 
 ![Documentation pipeline](media/flow.png)
 
-Full design precis: [docs/02-concept.md](docs/02-concept.md). Requirements, including the eight not yet met (check coverage, configurable branding, one-command upgrades, the decision-wording guardrail, a getting-started guide, Open Know-How export, ISO A3 sheets and a single command): [docs/03-requirements.md](docs/03-requirements.md). The checker catches 12 of the standard's 20 machine-checkable rules; the target is 18. The general arrangement sheet [RDK-DWG-001](cad/drawings/RDK-DWG-001.pdf) lays out the pipeline, and decisions are in [RDK-DDR-001](docs/decisions/0001-trl2-review-decisions.md).
+Full design precis: [docs/02-concept.md](docs/02-concept.md). Requirements, including the eight not yet met (check coverage, configurable branding, one-command upgrades, the decision-wording guardrail, a getting-started guide, Open Know-How export, ISO A3 sheets and a single command): [docs/03-requirements.md](docs/03-requirements.md). The checker catches 12 of the standard's 20 machine-checkable rules; the target is 18. The general arrangement sheet [RDK-DWG-001](cad/drawings/RDK-DWG-001.pdf) lays out the pipeline, and decisions are in [RDK-DDR-001](docs/decisions/0001-trl2-review-decisions.md) and [RDK-DDR-002](docs/decisions/0002-recommendations-accepted.md). Amish accepted the recommended distribution, identity, sheet-size, command-line, licensing and Open Know-How choices on 2026-09-25; building them is TRL 4 work and is on hold.
 
 A passing check means the documents are complete and consistent. It does not mean a design is safe or fit for use.
 
@@ -100,7 +100,7 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 
 ## Licenses
 
-- **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
+- **Documents, drawings, CAD, BOM and media**: [CC BY-SA 4.0](LICENSE) (RDK-DDR-002, D5)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
 A project of the [Design Molecule](https://designmolecule.com) lab. Gap-filling areas set.

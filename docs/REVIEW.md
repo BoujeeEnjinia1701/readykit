@@ -30,14 +30,14 @@ Requirements **not met**: R2 (Windows native untested), R6 (check coverage), R11
 
 ### Proposed, awaiting Amish
 
-1. **Distribution:** vendored `.kit/` (today), pip package, or template repository plus sync action. Recommendation: pip package plus template.
-2. **Identity:** keep portfolio branding hard-coded, or move it to a `readykit.yaml` with Design Molecule defaults. Recommendation: config file.
-3. **Sheet sizes:** ANSI B only, or add ISO A3 and A2. Recommendation: add A3.
-4. **Command-line interface:** separate scripts, or one `readykit` command (`init`, `check`, `render`, `media`, `upgrade`). Recommendation: one command with the scripts as wrappers.
-5. **Licenses:** `project.yaml` lists CERN-OHL-S for hardware and MIT for software. For a software-only project, option to switch non-code content to CC BY-SA 4.0 (as the standard uses). Recommendation: switch; not changed in this session.
-6. **Standards interop:** add Open Know-How manifest export at TRL 3. Recommendation: yes.
-7. **Name:** confirm "ReadyKit" before publishing to PyPI; availability not checked.
-8. **Pilot users:** a university lab, an open science hardware group (GOSH, AfricaOSH or reGOSH) or a startup.
+1. **Distribution:** vendored `.kit/` (today), pip package, or template repository plus sync action. Recommendation: pip package plus template. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).**
+2. **Identity:** keep portfolio branding hard-coded, or move it to a `readykit.yaml` with Design Molecule defaults. Recommendation: config file. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).**
+3. **Sheet sizes:** ANSI B only, or add ISO A3 and A2. Recommendation: add A3. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).**
+4. **Command-line interface:** separate scripts, or one `readykit` command (`init`, `check`, `render`, `media`, `upgrade`). Recommendation: one command with the scripts as wrappers. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).**
+5. **Licenses:** `project.yaml` lists CERN-OHL-S for hardware and MIT for software. For a software-only project, option to switch non-code content to CC BY-SA 4.0 (as the standard uses). Recommendation: switch; not changed in this session. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).** Applied in the session of 2026-09-25 (recommendations accepted).
+6. **Standards interop:** add Open Know-How manifest export at TRL 3. Recommendation: yes. **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002).**
+7. **Name:** confirm "ReadyKit" before publishing to PyPI; availability not checked. No recommendation; still Proposed, awaiting Amish.
+8. **Pilot users:** a university lab, an open science hardware group (GOSH, AfricaOSH or reGOSH) or a startup. No preference stated; still Proposed, awaiting Amish.
 
 `project.yaml` pitch and problem were left unchanged; the numbers found support them.
 
@@ -106,7 +106,7 @@ Times vary by up to a factor of two between runs because other jobs share the 2-
 
 ### Decisions recorded (RDK-DDR-001)
 
-Each of D1 to D7 is "Adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review":
+Each of D1 to D7 was "Adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review" and is now **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002)**:
 
 1. D1 Distribution: pip package plus template repository.
 2. D2 Identity: `readykit.yaml` with Design Molecule defaults.
@@ -122,7 +122,7 @@ Each of D1 to D7 is "Adopted as recommended for TRL 3 under Amish's 2026-09-25 i
 - O2 Pilot users (a university lab, an open science hardware group or a startup).
 - O3 Windows: native support required, or WSL2 enough?
 - O4 Decision-wording check (R13): generic, or tied to the portfolio phrase?
-- Proposed route for R6: add at least six of the eight missing checks (RDK-REQ-001 Table 4). Proposed route for R15: write the guide with the package.
+- Proposed route for R6: add at least six of the eight missing checks (RDK-REQ-001 Table 4). Proposed route for R15: write the guide with the package. Both now **Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002, D8 and D9)**, build on hold (TRL 4).
 - Carried from the TRL 2 note: the README TRL badge is still hand-written; kit files were not edited inside this repository.
 
 ### Findings for the kit owner
@@ -144,3 +144,70 @@ The India row's missing figure is now cited (Atal Innovation Mission home page).
 ### Recommended next step
 
 TRL 4 is on hold by Amish's instruction; nothing here should start it. The next step is Amish's review of D1 to D7 (especially D5, licensing, and D1, distribution) and a choice on O1 to O4. For reference only, TRL 4 would need: the pip package, `readykit.yaml`, the `readykit` command, ISO A3 sheets, the OKH exporter and the six or more missing checks built; a lab test report (TST, `environment: lab`) covering setup time with new users on Linux, macOS and Windows, coverage by seeded faults, false failures on repositories written by outside teams, and upgrade trials across five repositories; and build log entries.
+
+## Session 2026-09-25: recommendations accepted
+
+Amish wrote on 2026-09-25: "i accept all your recommendations, go with them across all repos." Every ReadyKit item with a recommendation is now "Decided by Amish, 2026-09-25: go with recommendation"; items without one stay "Proposed, awaiting Amish". The record is RDK-DDR-002.
+
+### Decisions applied and what changed
+
+| # | Decision | Applied at TRL 3 | Before | After |
+| --- | --- | --- | --- | --- |
+| D5 | Code MIT; documents, drawings, CAD, BOM and media CC BY-SA 4.0 | Yes | `LICENSE` CERN-OHL-S v2; `licenses.hardware` CERN-OHL-S-2.0; tag `cern-ohl-s`; front matter and title blocks CERN-OHL-S-2.0 | `LICENSE` CC BY-SA 4.0 legal code (SPDX text); `licenses.hardware` CC-BY-SA-4.0 (key kept for the website card); tag `cc-by-sa`; every controlled document, RDK-DWG-001 and RDK-DWG-010 CC-BY-SA-4.0; README badge and Licenses section; `CONTRIBUTING.md` |
+| D1 | Pip package plus template repository | Wording only; build on hold (TRL 4) | "Adopted for TRL 3 work" | "Decided"; BOM item 7 and RDK-DWG-001 note updated |
+| D2 | `readykit.yaml` for identity | Wording only; kit change on hold (TRL 4) | 13 hard-coded occurrences of 4 values | 13 occurrences of 5 values after the kit's site switch (designmolecule.com x3, Design Molecule Lab x2, GitHub owner x1, author x4, portfolio name x3) |
+| D3 | Add ISO A3 sheets | Wording only; kit change on hold (TRL 4) | "ISO A3 adopted" on RDK-DWG-001 and BOM item 3 | "ISO A3 decided"; `model.py` already switches the sheet parameter |
+| D4 | One `readykit` command | Wording only; build on hold (TRL 4) | | R18 route unchanged |
+| D6 | Open Know-How export | Wording only; build on hold (TRL 4) | | R16 route unchanged |
+| D7 | TRL 3 evidence for software | Already in place | | No change |
+| D8 | R6 route: add at least six missing checks | Build on hold (TRL 4); kit change | Proposed, awaiting Amish | Decided |
+| D9 | R15 route: write the guide with the package | On hold with D1 (TRL 4) | Proposed, awaiting Amish | Decided |
+
+Budget: `budget_usd` stays $0 (no recommendation changed it; BOM total $0.00). Pitch and problem are unchanged.
+
+Documents: RDK-PRB-001 v0.2 to v0.3, RDK-PRC-001 v0.3 to v0.4, RDK-REQ-001 v0.3 to v0.4, RDK-CAL-001 v0.1 to v0.2, RDK-DDR-001 v0.1 to v0.2, RDK-DDR-002 v0.1 new. RDK-DWG-001 Rev P1 to P2 (title block license, D1 and D3 notes, measured times); geometry unchanged, STEP and STL re-exported. The concept blueprint RDK-DWG-010 is Rev P2 for the license change.
+
+`sizing.py` now also counts "Design Molecule Lab" as an identity value and reports a new line [B8], the changed kit-code lines against the corpus. The rerun changed these numbers: kit code identical to the corpus in 38 of 38 before, 0 of 38 after (3 changed lines, all site and organization strings); setup 32 to 43 s before, 32 to 47 s after; check slope 0.6 to 0.7 ms per document before, 0.6 to 1.0 ms after (the last run shared the machine with other jobs), so the 2 s limit moves from 2,700 to 3,100 documents to 2,000 to 3,100. No requirement changed status.
+
+README: "What sparked the idea" rewritten around the GAO report of 1999 (GAO/NSIAD-99-162), which recommended that the Department of Defense assess technology maturity with TRLs and commit to a baseline only at a level analogous to TRL 7; the reference to how the portfolio was assembled is removed, and the first line of the concept rationale no longer refers to it. The other three write-up sections are kept. `docs/01-problem.md` did not attribute the idea to a review; only its license line changed.
+
+### Requirements status (RDK-REQ-001 v0.4)
+
+8 met, 8 not met, 0 at risk, 2 not verifiable at TRL 3, unchanged.
+
+| ID | Status | Value |
+| --- | --- | --- |
+| R6 | **Not met** | 12 of 20 rules (60%); 18 needed. Route D8 decided, on hold |
+| R11 | **Not met** | 13 hard-coded occurrences of 5 identity values. Route D2 decided, on hold |
+| R12 | **Not met** | Manual kit copy; STANDARDS.md and kit code differ in 38 of 38 corpus repositories at KIT_VERSION 1.3.1. Route D1 and D4 decided, on hold |
+| R13 | **Not met** | 2 of 3 guardrail faults caught. Wording choice O4 open |
+| R15 | **Not met** | No getting-started guide. Route D9 decided, on hold |
+| R16 | **Not met** | No OKH exporter; 3 of 5 fields. Route D6 decided, on hold |
+| R17 | **Not met** | ANSI B only. Route D3 decided, on hold |
+| R18 | **Not met** | Three scripts. Route D4 decided, on hold |
+| R1, R2 | Not verifiable | No new-user trial; Linux only |
+| R3, R4, R5, R7, R8, R9, R10, R14 | Met | Check 0.09 to 0.12 s; three PDFs 1.8 to 3.1 s; 20-part media 12 to 23 s; 0 false failures in 38; outputs reproducible; offline; 1.05 MB; $0.00 |
+
+### Still awaiting Amish
+
+- O1 Name "ReadyKit" for PyPI and GitHub (no recommendation).
+- O2 Pilot users (no preference stated).
+- O3 Windows native, or WSL2 enough (no recommendation).
+- O4 Decision-wording check: generic, or tied to the portfolio phrase (no recommendation).
+
+### Cross-repo actions
+
+Not done here; listed for the owners of the other repositories.
+
+1. **Kit source (shared `.kit/`):** bump KIT_VERSION. The site switch changed 3 lines of kit code and the project-code table changed `STANDARDS.md`, both at version 1.3.1 (RDK-CAL-001, B7 and B8).
+2. **Kit source:** D2 (`readykit.yaml`), D3 (ISO A3 in `drawing.py`), D4 (`readykit` command), D8 (six or more new checks) and the R13 wording check belong in the kit, not in this repository. Decided, but on hold with TRL 4.
+3. **Kit source:** `concept.render_all` has no license argument, so `cad/src/concept_media.py` sets the blueprint license through a subclass of `drawing.Sheet`. A `license` argument in the kit would remove the workaround.
+4. **Website (designmolecule.com card):** ReadyKit's `licenses.hardware` now reads CC-BY-SA-4.0. The key name was kept so the card still parses; the site may want to label it "content" for software projects.
+
+### Safety concerns
+
+No change. A passing check is not an engineering review, and the future safety-note check (part of D8) must raise a flag for a person, never replace the review.
+
+### TRL 4
+
+TRL 4 remains on hold by Amish's instruction. No package, command, exporter, check, test, trial or purchase was started. `trl: 3`, `trl_target: 3`.

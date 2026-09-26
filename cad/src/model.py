@@ -17,7 +17,7 @@ from pathlib import Path
 # Top-level parameters (mm). Edit these, not the geometry below.
 SHEET_SIZES = {                       # sheet sizes the drawing generator supports or will support
     "ANSI B": (431.8, 279.4),         # current kit sheet (drawing.py)
-    "ISO A3": (420.0, 297.0),         # adopted for TRL 3 work (RDK-DDR-001, D3); not yet in the kit
+    "ISO A3": (420.0, 297.0),         # decided (RDK-DDR-002, D3); not yet in the kit
 }
 PARAMS = {
     "page": (216.0, 279.0),           # US Letter, the kit's document page (216 x 279 mm, 8.5 x 11 in)

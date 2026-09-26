@@ -121,7 +121,8 @@ def sec_a():
     codes = re.findall(r"\|\s([A-Z]{3})\s\|\s[A-Z]", (KIT / "STANDARDS.md").read_text())
     codes = [c for c in codes if c != "OHP"]
     out("A3", f"Project codes in STANDARDS.md section 7: {len(codes)} (plus OHP, portfolio-wide)", len(codes))
-    ident = {"amishchadha.com": 0, "BoujeeEnjinia1701": 0, "Amish Chadha": 0, "Open Hardware Portfolio": 0}
+    ident = {"designmolecule.com": 0, "Design Molecule Lab": 0, "BoujeeEnjinia1701": 0, "Amish Chadha": 0,
+             "Open Hardware Portfolio": 0}
     where = {}
     for f in [*KIT.glob("*.py"), *(KIT / "style").glob("*"), *(KIT / "templates").glob("*")]:
         t = f.read_text(errors="ignore")
@@ -192,6 +193,15 @@ def sec_b(tmp, env, corpus):
                   f"STANDARDS.md identical in {std_same} of {len(rows)}, although all carry KIT_VERSION "
                   f"{(KIT / 'KIT_VERSION').read_text().strip()}; this repo's standard lists {len(ours - theirs)} project codes "
                   f"that {rows[0][0]}'s does not ({len(theirs - ours)} the other way)", std_same)
+        import difflib
+        ref = corpus / rows[0][0] / ".kit"
+        code_diff = [l for f in ("render.py", "drawing.py", "concept.py", "style/doc.html.j2")
+                     for l in difflib.unified_diff((ref / f).read_text().splitlines(), (KIT / f).read_text().splitlines(), n=0)
+                     if l.startswith("+") and not l.startswith("+++")]
+        site_only = all("designmolecule.com" in l or "Design Molecule" in l for l in code_diff)
+        out("B8", f"Kit code and PDF template against {rows[0][0]}'s: {len(code_diff)} changed lines"
+                  + (", all of them the site and organization strings (the former site domain replaced by designmolecule.com)"
+                     if code_diff and site_only else ""), len(code_diff))
         res.update(corpus_n=len(rows), corpus_fail=len(fails), corpus_med=statistics.median(ts), corpus_max=max(ts))
     else:
         out("B4", "Corpus not found; corpus measurements skipped")

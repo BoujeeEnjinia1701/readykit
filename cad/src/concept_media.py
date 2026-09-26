@@ -12,20 +12,31 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / ".kit"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from dataclasses import dataclass
+import drawing
 from concept import Part, render_all
 from model import modules, laptop
+
+
+@dataclass
+class _Sheet(drawing.Sheet):
+    """Kit sheet with this repository's content license (RDK-DDR-002, D5) in the title block."""
+    license: str = "CC-BY-SA-4.0"
+
+
+drawing.Sheet = _Sheet  # render_all imports Sheet from drawing at call time
 
 # Geometry comes from the parametric model (cad/src/model.py), so the media follow its parameters.
 parts = [Part(name, shape, color, no, explode) for no, name, shape, color, explode in modules()]
 context = [Part("Laptop, 14 in class", laptop(), "#C8CDD3")]
 
 outs = render_all(
-    parts, project="ReadyKit", title="Illustrative massing, software project", dwg_no="RDK-DWG-010",
+    parts, project="ReadyKit", title="Illustrative massing, software project", dwg_no="RDK-DWG-010", rev="P2",
     key_figures=["ILLUSTRATIVE, SOFTWARE PROJECT",
                  "Inputs: Markdown with YAML front matter, build123d Python",
                  "Check: about 0.1 s per repo (measured, RDK-CAL-001)",
                  "PDF render: 2 to 3 s for 3 docs (measured)",
-                 "Concept media: about 5 s here, 12 to 23 s for 20 parts",
+                 "Concept media: 5 to 6 s here, 12 to 23 s for 20 parts",
                  "Coverage 12 of 20 rules (target 18); budget $0"],
     cut=False, scale_figure=False, context=context,
 )

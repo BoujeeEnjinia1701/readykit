@@ -1,11 +1,11 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
 1 Document control checker,1,"Front matter fields, doc ID pattern, version and revision rows, status, em dash scan in controlled documents (render.py --check)",Self (MIT),0.00,make,Exists in .kit/render.py; 12 of 20 rules caught (RDK-CAL-001 E1)
 2 PDF renderer and house style,1,"Markdown to HTML to PDF (Python-Markdown, Jinja2, WeasyPrint), CSS, cover with document control table, status band",Self (MIT); WeasyPrint (BSD) from PyPI,0.00,make,Exists; identity hard-coded until readykit.yaml (D2)
-3 Drawing sheet generator,1,"ANSI B sheet, title block, revision table, third-angle symbol, blueprint theme (drawing.py)",Self (MIT); CairoSVG (LGPL-3.0) from PyPI,0.00,make,Exists; ISO A3 adopted for TRL 3 work (D3) and not yet built
+3 Drawing sheet generator,1,"ANSI B sheet, title block, revision table, third-angle symbol, blueprint theme (drawing.py)",Self (MIT); CairoSVG (LGPL-3.0) from PyPI,0.00,make,Exists; ISO A3 decided (D3) and not yet built (TRL 4 on hold)
 4 Concept media renderer,1,"build123d massing to hero, exploded, cutaway, blueprint, GLB and viewer page (concept.py)",Self (MIT); build123d (Apache-2.0) from PyPI,0.00,make,Exists; numpy z-buffer renderer needs no GPU
 5 TRL gate and badge,1,"TRL evidence rules 1 to 6, portfolio phase cap, media presence check; badge on PDF cover",Self (MIT),0.00,make,Exists; README badge is still hand-written
 6 Agent guardrails,1,"CLAUDE.md template, PHASE.yaml, slash commands (populate, advance-trl3, rein-in, refresh-media)",Self (MIT),0.00,make,Exists; decision-wording check not yet automated (R13)
-7 Template repository and CI workflow,1,"Folder layout, licenses, controlled-doc template, GitHub Actions docs.yml",Self (MIT); GitHub template repository,0.00,make,Exists as per-repo scaffold; template and pip package adopted for TRL 3 work (D1) and not yet published
+7 Template repository and CI workflow,1,"Folder layout, licenses (MIT code; CC BY-SA 4.0 content), controlled-doc template, GitHub Actions docs.yml",Self (MIT); GitHub template repository,0.00,make,Exists as per-repo scaffold; template and pip package decided (D1) and not yet published (TRL 4 on hold)
 8 Bundled fonts,1,IBM Plex Sans and Mono,IBM via github.com/IBM/plex (SIL OFL 1.1),0.00,buy,Free; license text in .kit/fonts/OFL.txt
 9 CI hosting,1,GitHub Actions on public repositories,GitHub,0.00,buy,Free for public repositories; private repositories use included minutes
 10 Python dependencies,1,"PyYAML, Python-Markdown, Jinja2, WeasyPrint, CairoSVG, build123d, NumPy, Matplotlib (.kit/requirements.txt); about 1.1 GB installed",PyPI (open source),0.00,buy,Free; licenses audited in RDK-CAL-001 F2

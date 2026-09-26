@@ -3,11 +3,11 @@ doc_id: RDK-PRC-001
 title: ReadyKit design precis
 project: ReadyKit
 doc_type: Design precis
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
-license: CERN-OHL-S-2.0
+license: CC-BY-SA-4.0
 revisions:
 - version: "0.1"
   date: '2026-09-25'
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Design choices adopted for TRL 3 work under Amish's 2026-09-25 instruction, open for his review (RDK-DDR-001); first-order numbers replaced by RDK-CAL-001 measurements; TRL 3 evidence for a software project; open questions trimmed
+- version: "0.4"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002)
 ---
 
 # ReadyKit design precis
@@ -67,29 +71,29 @@ Table 2. Measured figures from `docs/04-calcs/sizing.py` (RDK-CAL-001), 2-core L
 
 | Quantity | Value | Basis |
 | --- | --- | --- |
-| Check time, this repository | 0.09 s, of which about 80 ms is Python start-up | Measured |
+| Check time, this repository | 0.09 to 0.12 s, of which 80 to 100 ms is Python start-up | Measured |
 | Check time, 38 finished portfolio repositories | 0.10 s median, 0.12 to 0.27 s maximum | Measured |
-| Check time per added document | 0.6 to 0.7 ms; 2 s is reached at about 2,700 to 3,100 documents | Measured, 10 to 400 documents |
+| Check time per added document | 0.6 to 1.0 ms; 2 s is reached at about 2,000 to 3,100 documents | Measured, 10 to 400 documents |
 | PDF render | 0.6 to 1.0 s per document; 1.8 to 3.1 s for three | Measured, 5 documents, 31 pages |
-| Concept media, this repository (7 parts) | about 5 s | Measured |
+| Concept media, this repository (7 parts) | 5 to 6 s | Measured |
 | Concept media, 20-part model with cutaway | 12 to 23 s | Measured |
 | Vendored kit folder | 1.05 MB, 94% fonts | Measured |
 | Kit source | 808 lines of Python in 3 files | Counted |
 | Portfolio using it | 85 project codes in the standard | Counted |
-| Dependency install into a fresh environment | 32 to 43 s, 1.09 GB | Measured; WeasyPrint system libraries already present |
+| Dependency install into a fresh environment | 32 to 47 s, 1.09 GB | Measured; WeasyPrint system libraries already present |
 | Parts cost | $0 | All modules MIT; dependencies free and open source |
 
 Check time grows linearly with document count, as the TRL 2 note assumed; the slope is small enough that start-up dominates for any real repository.
 
 ## Key design choices
 
-The recommendations below were adopted as recommended for TRL 3 under Amish's 2026-09-25 instruction, open for his review (RDK-DDR-001). None of them is built yet; the requirements they create are R10 to R12 and R16 to R18 in RDK-REQ-001.
+Each choice below is decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-001 and RDK-DDR-002). Only D5 (licensing) and D7 (evidence) are applied in the repository. D1 to D4 and D6 are features still to be built; they define requirements R10 to R12 and R16 to R18 in RDK-REQ-001, and building them is TRL 4 work, on hold by Amish's instruction.
 
 1. **Distribution (D1).** A pip package `readykit` with a small `.kit/` stub pinned to a version, plus a GitHub template repository. Pip gives one-command upgrades (R12); the template gives a one-click start. RDK-CAL-001 found that all 38 finished repositories carry kit 1.3.1 but none has the current `STANDARDS.md`, which is the drift a versioned package prevents.
 2. **Identity and branding (D2).** Organization name, website, repository owner, author and colors move into `readykit.yaml`, with Design Molecule values as the default (R11).
-3. **Sheet sizes (D3).** ISO A3 (420 x 297 mm) is added beside ANSI B (431.8 x 279.4 mm) (R17). The parametric model already takes the sheet size as a parameter.
+3. **Sheet sizes (D3).** ISO A3 (420 x 297 mm) is to be added beside ANSI B (431.8 x 279.4 mm) (R17). The parametric model already takes the sheet size as a parameter; the kit's sheet generator change is on hold with the rest of the build.
 4. **Command-line interface (D4).** One `readykit` command with `init`, `check`, `render`, `media` and `upgrade`, keeping the scripts as thin wrappers so existing repositories keep working (R18).
-5. **Licensing of the tool (D5).** Code under MIT and documentation under CC BY-SA 4.0, matching the standard. Adopted for the standalone release; the repository's license files are unchanged until Amish reviews it.
+5. **Licensing of the tool (D5).** Code under MIT and non-code content (documents, drawings, CAD, BOM and media) under CC BY-SA 4.0, matching the standard. Applied on 2026-09-25: `LICENSE` holds the CC BY-SA 4.0 legal code, `LICENSE-SOFTWARE` stays MIT, and every controlled document and drawing title block carries CC-BY-SA-4.0.
 6. **Relationship to existing standards (D6).** Export an Open Know-How 1.0 manifest (`okh.yml`) from the same metadata (R16). Three of its five required fields (title, description, license) already exist in `project.yaml`; the manifest author and the project link come from `readykit.yaml`. A DIN SPEC 3105 checklist is not adopted.
 7. **TRL 3 evidence for a software project (D7).** The parametric model exports the illustrative massing as STEP and STL, the general arrangement sheet shows the pipeline layout, and the calculation note measures speed and coverage. This keeps the standard's evidence rule unchanged for software.
 
