@@ -8,7 +8,7 @@ The lab's documentation and readiness kit released as an open tool: document con
 
 ![ReadyKit: documentation and readiness kit for open hardware, photoreal render](media/render-hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/RDK-DWG-001.pdf) · [Calculation note](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement (PDF)](cad/drawings/RDK-DWG-001.pdf) · [Calculation note](docs/04-calcs/01-sizing.md) · [Prototype build plan](docs/05-build-plan.md) · [Design decisions](docs/06-design-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -78,7 +78,17 @@ Numbered as in the exploded view and the bill of materials.
 6. Agent guardrails
 7. Template repository and CI workflow
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv). Every line costs $0 against a budget of $0: the modules are MIT and the dependencies are free and open source.
+The working bill of materials is in [bom/bom.csv](bom/bom.csv). Value-engineering target: USD 0. Estimated cost of the constructable design: USD 0 (USD 0 over the target): the modules are MIT and the dependencies are free and open source. Line 12, the repository reader, and line 13, the bundled 3D viewer script, were added to make the design constructable.
+
+## Building the prototype
+
+The prototype build plan ([RDK-BLD-001](docs/05-build-plan.md)) sets out how to build the first standalone ReadyKit, module by module, with a making sketch for each module, a close-up of every interface and a picture for every step. Drawing it showed five joints that could not work as the concept described them, so the design was made constructable (decision record [RDK-DDR-003](docs/decisions/0003-design-for-construction.md), open for Amish's review): a shared repository reader, a defined 47 kB stub in each repository with the agent rules in it, a small core install for the check, a bundled viewer script so everything works offline, and a README badge written by the readiness gate. Decisions still open are in the [design decisions register](docs/06-design-decisions.md). Building to the plan is TRL 4 work and is on hold.
+
+![ReadyKit prototype: every component pulled apart and numbered in build order](docs/05-build-plan/overview.png)
+
+## Safety
+
+ReadyKit is software and has no physical hazards of its own. A passing check means the documents are complete and consistent with the standard; it does not mean a design is safe, correct or fit for use. Rendered documents and drawings keep their "Draft" or "not for fabrication" marking until a qualified person has reviewed the engineering, and the planned safety-note check raises a flag for a person, never replacing that review.
 
 ## Repository layout
 

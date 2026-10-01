@@ -235,3 +235,51 @@ Amish asked on 2026-09-26 for photoreal renders across the portfolio, starting w
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-10-01: build plan and design for construction (kit 1.7.0)
+
+Under Amish's 2026-09-30 instruction to make every design physically buildable while drawing the build plan, and his 2026-10-01 note that budgets are value-engineering targets.
+
+### What was done
+
+- Kit 1.7.0 installed (`.kit/`, `.claude/commands/`); `CLAUDE.md` now matches `.kit/CLAUDE.md`.
+- `docs/05-build-plan.md` (RDK-BLD-001 v0.1): plan, not yet built. Nine components in build order (template repository and CI, bought open-source parts, repository reader, checker, readiness gate and badge, PDF renderer, drawing sheet generator, concept media renderer, agent guardrails), ten assembly steps, first checks against R1 to R18, five safety stops. No open decisions in it.
+- `docs/06-design-decisions.md` (RDK-DEC-001 v0.1): six open decisions, five items to confirm, value engineering, and the decisions made with Amish's words.
+- `docs/decisions/0003-design-for-construction.md` (RDK-DDR-003 v0.1, Draft, open for Amish's review).
+- `cad/src/model.py`: two objects added (repository reader as a card index box, bought parts as a tray), document stack centred on the folder, and illustration checks (`python cad/src/model.py --check`, 82 checks, all pass). STEP and STL re-exported.
+- `cad/src/build_plan_media.py`: overview, eight making sketches (RDK-DWG-101 to 108, an interface view in place of three views because the modules are software), seven joint close-ups and ten step pictures, all looked at; `drawing.py --check-text` reports nothing.
+- `cad/drawings/RDK-DWG-001` Rev P4; concept blueprint RDK-DWG-010 Rev P4; hero, exploded, blueprint, model and viewer regenerated.
+- `bom/bom.csv`: lines 12 (repository reader) and 13 (3D viewer script) added; lines 2, 5, 7, 8 and 10 reworded; all USD 0.00. `bom/bom-notes.md` updated.
+- `project.yaml`: `design_state: constructable`; DDR-003, BLD-001 and DEC-001 added to `trl_evidence`. `budget_usd` unchanged.
+- `README.md`: build plan and register links; "Building the prototype" section with the overview picture; a short "Safety" section (the README had none, which the release gate warns about); BOM sentence in value-engineering wording.
+
+### Design changes made for construction (RDK-DDR-003)
+
+1. P1: new repository reader module; the project file was read in eight places in seven kit scripts, three different ways.
+2. P2: per-repository stub defined (about 47 kB: version pin, identity file, agent rules and commands, copy of the standard); agent rules must live in the repository; code and fonts stay in the package.
+3. P3: dependencies split into a core of about 5 MB (enough for the check) and extras (PDF, drawings, media, release); the CI check job installs the core only.
+4. P4: 3D viewer script bundled and copied beside the model, closing the offline gap in R9.
+5. P5: the readiness gate writes the README badge line as well as the PDF cover.
+6. P6: illustration made consistent (stack inside the folder, objects for the reader and the bought parts).
+
+### Requirements
+
+No status change: 8 met, 8 not met (R6, R11, R12, R13, R15, R16, R17, R18), 2 not verifiable at TRL 3 (R1, R2). P2 to P4 are expected to help R10, R1 and R9; each is verified at TRL 4. Value-engineering target USD 0; estimated cost USD 0.
+
+### Proposed, awaiting Amish
+
+- A1: scope of the first package beyond the seven modules (recommend: release gate and archive helper in the release extra; photoreal renders and cards stay portfolio-only).
+- A2: oldest Python version (recommend 3.10 or later).
+- O1 to O4 unchanged. All are in the register.
+
+### Stale media
+
+`media/render-hero.png`, `media/card.png` and `media/social-preview.png` show the concept scene without the reader and the tray; they are made on Amish's Mac and need regenerating. (This cloud copy has no `media/render-hero.png`.)
+
+### Safety concerns
+
+No change: a passing check is not an engineering review, and the safety-note rule must only raise a flag.
+
+### Recommended next step
+
+Amish's review of RDK-DDR-003 and a choice on A1, A2 and O1 to O4. TRL 4 stays on hold.

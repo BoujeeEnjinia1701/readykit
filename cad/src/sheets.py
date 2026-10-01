@@ -1,4 +1,4 @@
-"""ReadyKit general arrangement sheet RDK-DWG-001, Rev P2 (TRL 3).
+"""ReadyKit general arrangement sheet RDK-DWG-001, Rev P4 (TRL 3, constructable design, RDK-DDR-003).
 
 ReadyKit is software, so its general arrangement is the layout of the documentation pipeline:
 inputs, the seven numbered modules (as in bom/bom.csv), outputs and the CI gate, with the
@@ -111,7 +111,7 @@ def main():
     # outputs
     outs = [(34, "Controlled PDFs", ["docs/pdf/<ID>_v<ver>.pdf"]), (66, "Drawing sheets", ["cad/drawings/*-DWG-*", ".svg, .pdf, .png"]),
             (98, "Concept media", ["media/hero.png, exploded,", "blueprint, model.glb"]), (130, "Model exports", ["cad/step, cad/stl", "(project model.py)"]),
-            (150, "TRL on PDF cover", ["README badge by hand (gap)"])]
+            (150, "TRL on PDF cover", ["and README badge (gate writes it)"])]
     for y, t, s in outs:
         L += box(220, y, 46, 14 if len(s) == 1 else 17, t, s, fill="#FFFFFF", stroke=INK)
     # arrows: inputs to checker and gate (the gate reads project.yaml, PHASE.yaml, model.py, STEP and the BOM)
@@ -135,6 +135,8 @@ def main():
     L += arrow([(142, 92), (144, 92), (144, 146), (216, 146), (216, 157), (220, 157)])
     L += arrow([(74, 121), (77, 121), (77, 172), (212, 172), (212, 138), (220, 138)], color=MUTED)
     L.append(_t(130, 170.5, "project model.py exports STEP and STL (not a kit module)", 2.0, 400, MUTED, "middle"))
+    # repository reader (RDK-DDR-003, P1)
+    L += box(18, 148, 56, 22, "Repository reader", ["reads every input once;", "one record to modules 1 to 5", "(new, DDR-003)"], no=12)
     # guardrails and template/CI band
     L += box(18, 178, 110, 24, "Agent guardrails", ["CLAUDE.md: TRL cap, decision rights, one step per session,",
                                                    "review note; .claude/commands/: populate, advance-trl3,",
@@ -142,17 +144,18 @@ def main():
     L += box(136, 178, 130, 24, "Template repository and CI workflow", [
         ".github/workflows/docs.yml: check on every push and pull request;",
         "render and publish PDFs on release tags <ID>/v<ver> and <DWG>/rev<X>.",
-        "Distribution decided: pip package plus template (D1); build on hold."], no=7)
+        "Pip package plus template (D1); 47 kB stub per repo; core install for the check (DDR-003)."], no=7)
     L.append(f'<rect x="14" y="24" width="256" height="182" fill="none" stroke="{MUTED}" stroke-width="0.3" stroke-dasharray="3 1.5"/>')
-    L.append(_t(16, 209.5, "Dashed boundary: one project repository (item 7). Modules 1 to 5 live in its .kit/ folder today (vendored, kit 1.3.1).",
+    L.append(_t(16, 209.5, "Dashed boundary: one project repository (item 7). Modules 1 to 5 and 12 come from the pip package; the repository keeps a stub.",
                 2.1, 400, MUTED))
 
-    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P3", license="CERN-OHL-S-2.0",
-                     author="Amish Chadha", date="2026-09-26", scale=None, units="mm (iso view)", theme="technical",
+    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P4", license="CERN-OHL-S-2.0",
+                     author="Amish Chadha", date="2026-10-01", scale=None, units="mm (iso view)", theme="technical",
                      material="Software; nothing to fabricate. Massing is illustrative. PRELIMINARY, NOT FOR FABRICATION",
                      revisions=[("P1", "Preliminary GA for TRL 3 (pipeline layout, cad/src/model.py)", DATE, "AC"),
                                ("P2", "Recommendations accepted (DDR-002): D5 content license; D1, D3 decided", DATE, "AC"),
-                               ("P3", "D5 reversed (DDR-002): back to CERN-OHL-S-2.0", "2026-09-26", "AC")])
+                               ("P3", "D5 reversed (DDR-002): back to CERN-OHL-S-2.0", "2026-09-26", "AC"),
+                               ("P4", "Design for construction (DDR-003): reader, stub, core install, badge", "2026-10-01", "AC")])
     s._layers += L
     work = ROOT / "cad" / "drawings" / "_views"
     iso = safe_iso(assembly(), work)
@@ -164,13 +167,15 @@ def main():
         f"Check: {float(t_check):.2f} s per repository; about {R.get('B3', '0.7')} ms per extra document",
         f"PDF: about {float(t_pdf):.1f} s for 3 documents; text reproducible",
         f"Media: {float(t_media):.1f} s (7 parts), {float(t_20):.0f} s (20 parts); no GPU",
-        f"Kit folder {float(R.get('A1', 1.05)):.2f} MB; dependencies 1.1 GB, install under 1 min",
+        f"Kit folder {float(R.get('A1', 1.05)):.2f} MB (CAL); all extras 1.1 GB, install under 1 min",
         f"Coverage {R.get('E1', 12)} of 20 rules; target 18 (R6 not met)",
         "Exit code 0 pass, 1 fail; CI blocks the merge on 1",
         "Times: last sizing.py run; ranges over runs in RDK-CAL-001",
         f"Sheet {PARAMS['sheet']} {D['sheet_w']} x {D['sheet_h']} mm; ISO A3 420 x 297 decided (D3)",
         "Page US Letter 216 x 279 mm, 20 mm margins",
-        "Cost $0; budget_usd $0",
+        "Stub per repository about 47 kB; check needs the core install only (about 5 MB)",
+        "Viewer script bundled beside model.glb, so the viewer works offline (DDR-003)",
+        "Value-engineering target USD 0; estimated cost USD 0",
     ], x=276, y=118, width=140)
     out = s.save(ROOT / "cad" / "drawings" / "RDK-DWG-001")
     shutil.rmtree(work, ignore_errors=True)
