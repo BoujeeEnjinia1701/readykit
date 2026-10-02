@@ -3,9 +3,9 @@ doc_id: RDK-DDR-002
 title: ReadyKit recommendations accepted
 project: ReadyKit
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-26'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: D5 reversed by Amish on 2026-09-26; portfolio license pair (CERN-OHL-S v2 and MIT) restored
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "O1 to O4 decided by Amish as recommended (RDK-DEC-001)"
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted. Every item below that carried a recommendation is "Decided by Amish, 2026-09-25: go with recommendation". Items with no recommendation stay "Proposed, awaiting Amish". D5 was reversed by Amish on 2026-09-26.
+- **Status:** accepted. Every item below that carried a recommendation is "Decided by Amish, 2026-09-25: go with recommendation". Items with no recommendation (O1 to O4) were decided by Amish on 2026-10-02, as later recommended: "i approve your recommendations for all 555 open decisions." (RDK-DEC-001). D5 was reversed by Amish on 2026-09-26.
 
 ## Context
 
@@ -50,14 +54,14 @@ The options for D1 to D7 are in RDK-DDR-001 and in `docs/REVIEW.md` (session 202
 | D8 | Route for R6, check coverage | Add at least six of the eight missing checks in RDK-REQ-001, Table 4 | Decided by Amish, 2026-09-25: go with recommendation. Build on hold (TRL 4); kit change listed as a cross-repo action | R6 route in RDK-REQ-001 Table 3 |
 | D9 | Route for R15, documentation | Write the getting-started guide together with the package | Decided by Amish, 2026-09-25: go with recommendation. On hold with D1 (TRL 4) | R15 route in RDK-REQ-001 Table 3 |
 
-*Table 2. Items still open.*
+*Table 2. Items left open on 2026-09-25, decided by Amish on 2026-10-02.*
 
 | # | Item | Status |
 | --- | --- | --- |
-| O1 | Name "ReadyKit" for PyPI and GitHub. No recommendation was made. | Proposed, awaiting Amish |
-| O2 | Pilot users: a university lab, an open science hardware group or a startup. No preference was stated. | Proposed, awaiting Amish |
-| O3 | Windows: native support required, or WSL2 enough? No recommendation was made. | Proposed, awaiting Amish |
-| O4 | Decision-wording check (R13): generic, or tied to the portfolio phrase? No recommendation was made. | Proposed, awaiting Amish |
+| O1 | Name "ReadyKit" for PyPI and GitHub. No recommendation was made. | Decided by Amish, 2026-10-02, as later recommended: keep "ReadyKit"; recheck the package index just before the first release and publish the first real release under that name as soon as the package installs (the GitHub repository already exists under Amish's account) (RDK-DEC-001) |
+| O2 | Pilot users: a university lab, an open science hardware group or a startup. No preference was stated. | Decided by Amish, 2026-10-02, as later recommended: an open science hardware group, with GOSH (Gathering for Open Science Hardware) as the first candidate, recruiting two or three member projects through its community forum; a university lab as the second pilot (RDK-DEC-001) |
+| O3 | Windows: native support required, or WSL2 enough? No recommendation was made. | Decided by Amish, 2026-10-02, as later recommended: supported through WSL2 for the first release; native Windows added later if pilot users ask for it (RDK-DEC-001) |
+| O4 | Decision-wording check (R13): generic, or tied to the portfolio phrase? No recommendation was made. | Decided by Amish, 2026-10-02, as later recommended: generic, so any decision written as made must name an owner and a date; each repository sets its 'still open' phrase in its identity file, defaulting to "Proposed, awaiting" (RDK-DEC-001) |
 
 ### D5 reversed, 2026-09-26
 

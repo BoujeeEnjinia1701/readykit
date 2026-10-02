@@ -283,3 +283,46 @@ No change: a passing check is not an engineering review, and the safety-note rul
 ### Recommended next step
 
 Amish's review of RDK-DDR-003 and a choice on A1, A2 and O1 to O4. TRL 4 stays on hold.
+
+## Session 2026-10-02: open decisions decided
+
+Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." The recommendations written for this repo's open decisions are recorded as decided.
+
+### Decisions recorded
+
+6 decisions, moved from "Open decisions" to "Decisions made" in the register (RDK-DEC-001 v0.2):
+
+1. Name: keep "ReadyKit"; recheck the package index just before the first release and publish the first real release under that name as soon as the package installs (RDK-DDR-001, O1).
+2. Pilot users: an open science hardware group, GOSH as the first candidate (two or three member projects through its forum), a university lab second (O2).
+3. Windows through WSL2 for the first release; native later if pilot users ask (O3).
+4. R13 rule generic (any decision written as made names an owner and a date), with the "still open" phrase set per repository, default "Proposed, awaiting" (O4).
+5. Package scope (a): release gate and archive helper in the release extra, build plan pictures in the media extra, photoreal renders and storefront cards portfolio only (RDK-DDR-003, A1).
+6. Python 3.11 or later, tested in CI on 3.11 and the newest release (RDK-DDR-003, A2, option b; the register had recommended (a)).
+
+The design-for-construction changes P1 to P6 (RDK-DDR-003, Table 1) were not among the open decisions in the register and are not recorded as accepted; see "Points found in the review".
+
+### Documents changed
+
+- `docs/06-design-decisions.md`: RDK-DEC-001 v0.2
+- `docs/decisions/0001-trl2-review-decisions.md`: RDK-DDR-001 v0.4
+- `docs/decisions/0002-recommendations-accepted.md`: RDK-DDR-002 v0.3
+- `docs/decisions/0003-design-for-construction.md`: RDK-DDR-003 v0.2 (A1 and A2 decided; status kept Draft, P1 to P6 still open)
+- `docs/02-concept.md`: RDK-PRC-001 v0.6 (open questions)
+- `docs/03-requirements.md`: RDK-REQ-001 v0.6 (R2 and R13 targets)
+- `docs/04-calcs/01-sizing.md`: RDK-CAL-001 v0.4 (requirement table targets; no figure changed)
+- `docs/05-build-plan.md`: RDK-BLD-001 v0.2 (R13 rule text and the Windows platform check)
+
+### Follow-up actions to carry approved decisions into the design
+
+1. Decision 1: recheck `pypi.org/project/readykit/` just before the first release and publish the first real release as soon as the package installs (docs).
+2. Decision 2: approach GOSH through its community forum for two or three pilot projects; nothing is agreed (docs).
+3. Decision 3: set the Windows CI runner to WSL2 in the CI workflow and show it in the build plan's CI picture if it names platforms (pictures).
+4. Decision 4: add the "still open" phrase field to the identity file in the model of `readykit.yaml` and to the reader module's record (model).
+5. Decision 5: show the release and media extras with the release gate, archive helper and build plan pictures in RDK-DWG-001 and the build plan pictures of section 3.1 and step 2 (drawings, pictures).
+6. Decision 6: set `requires-python >= 3.11` and the CI matrix (3.11 and newest) in the package skeleton when it is built (docs).
+
+### Points found in the review
+
+- The design for construction changes P1 to P6 (DDR-003, Table 1) are still open for Amish's review, but the register has no row for accepting them. They should get one; the recommendation is to accept.
+- Item 1 says GitHub was not checked, but project.yaml already names the repository BoujeeEnjinia1701/readykit, so the GitHub name is in hand.
+- Python 3.10 reaches end of life in October 2026, which makes the register's recommendation for item 6 out of date as of this review.

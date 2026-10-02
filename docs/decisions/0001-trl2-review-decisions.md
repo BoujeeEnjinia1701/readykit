@@ -3,9 +3,9 @@ doc_id: RDK-DDR-001
 title: ReadyKit TRL 2 review decisions
 project: ReadyKit
 doc_type: Design decision record
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-26'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,12 +21,16 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: D5 row marked superseded; D5 reversed by Amish on 2026-09-26 (RDK-DDR-002); license back to CERN-OHL-S-2.0
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "O1 to O4 decided by Amish as recommended (RDK-DEC-001)"
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted for D1 to D7. Amish accepted every recommendation on 2026-09-25, so each of D1 to D7 is "Decided by Amish, 2026-09-25: go with recommendation" (RDK-DDR-002). Items O1 to O4 carry no recommendation and remain "Proposed, awaiting Amish".
+- **Status:** accepted for D1 to D7. Amish accepted every recommendation on 2026-09-25, so each of D1 to D7 is "Decided by Amish, 2026-09-25: go with recommendation" (RDK-DDR-002). Items O1 to O4 carried no recommendation at TRL 2; recommendations were written for them later, and Amish approved them on 2026-10-02: "i approve your recommendations for all 555 open decisions." (RDK-DEC-001).
 
 ## Context
 
@@ -52,14 +56,14 @@ The options for items D1 to D6 are listed in `docs/REVIEW.md` (session 2026-09-2
 | D6 | Standards interoperability | Add an Open Know-How (OKH) manifest export as a TRL 3 requirement. | Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002) |
 | D7 | TRL 3 evidence for a software project | `cad/src/model.py` exports the illustrative massing of the kit's outputs as STEP and STL; the general arrangement sheet RDK-DWG-001 shows the pipeline layout; RDK-CAL-001 covers measured check and render times and check coverage; `budget_usd` stays at $0. | Decided by Amish, 2026-09-25: go with recommendation (RDK-DDR-002) |
 
-*Table 2. Items that remain open.*
+*Table 2. Items left open at TRL 2, decided by Amish on 2026-10-02.*
 
 | # | Item | Status |
 | --- | --- | --- |
-| O1 | Name. Confirm "ReadyKit" before publishing to PyPI. No recommendation was made. On 2026-09-25, `pypi.org/project/readykit/` returned "not found", so the name appeared free on PyPI; GitHub was not checked, and nothing was reserved. | Proposed, awaiting Amish |
-| O2 | Pilot users: a university lab, an open science hardware group (GOSH, AfricaOSH or reGOSH) or a startup. No preference was stated. | Proposed, awaiting Amish |
-| O3 | Windows: is native support required, or is WSL2 enough? No recommendation was made. R2 accepts either. | Proposed, awaiting Amish |
-| O4 | Decision-wording check (R13): generic, or tied to the portfolio's "Proposed, awaiting" phrase? No recommendation was made. | Proposed, awaiting Amish |
+| O1 | Name. Confirm "ReadyKit" before publishing to PyPI. No recommendation was made. On 2026-09-25, `pypi.org/project/readykit/` returned "not found", so the name appeared free on PyPI; GitHub was not checked, and nothing was reserved. | Decided by Amish, 2026-10-02, as later recommended: keep "ReadyKit"; recheck the package index just before the first release and publish the first real release under that name as soon as the package installs (the GitHub repository already exists under Amish's account) (RDK-DEC-001) |
+| O2 | Pilot users: a university lab, an open science hardware group (GOSH, AfricaOSH or reGOSH) or a startup. No preference was stated. | Decided by Amish, 2026-10-02, as later recommended: an open science hardware group, with GOSH (Gathering for Open Science Hardware) as the first candidate, recruiting two or three member projects through its community forum; a university lab as the second pilot (RDK-DEC-001) |
+| O3 | Windows: is native support required, or is WSL2 enough? No recommendation was made. R2 accepts either. | Decided by Amish, 2026-10-02, as later recommended: supported through WSL2 for the first release; native Windows added later if pilot users ask for it (RDK-DEC-001) |
+| O4 | Decision-wording check (R13): generic, or tied to the portfolio's "Proposed, awaiting" phrase? No recommendation was made. | Decided by Amish, 2026-10-02, as later recommended: generic, so any decision written as made must name an owner and a date; each repository sets its 'still open' phrase in its identity file, defaulting to "Proposed, awaiting" (RDK-DEC-001) |
 
 ## Consequences
 

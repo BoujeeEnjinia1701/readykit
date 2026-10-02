@@ -3,9 +3,9 @@ doc_id: RDK-DDR-003
 title: ReadyKit design for construction
 project: ReadyKit
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Changes that make the design constructable, with the reason for each; made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review
+- version: "0.2"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "A1 decided as (a) and A2 as (b) by Amish; P1 to P6 still open for his review"
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-10-01
-- **Status:** Draft. Every change below was made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review. Items in Table 3 are "Proposed, awaiting Amish".
+- **Status:** Draft. Every change below was made under Amish's 2026-09-30 instruction to make the design physically buildable; the changes P1 to P6 in Table 1 remain open for his review. The items in Table 3 were decided by Amish on 2026-10-02: "i approve your recommendations for all 555 open decisions." A1 is decided as (a); A2 is decided as (b), Python 3.11 or later, the later recommendation, since Python 3.10 reaches end of life in October 2026. Both are recorded in the design decisions register (RDK-DEC-001).
 
 ## Context
 
@@ -54,15 +58,15 @@ The changes keep what ReadyKit does: the same seven modules, the same commands, 
 | Calculations | RDK-CAL-001 unchanged: nothing has been built, so no measured figure moves. The stub size (47 kB) and core install size (5 MB) are measured here from the files and installed libraries they would contain; they are estimates for the package until TRL 4. | |
 | Requirements | No status changes. P2, P3 and P4 are expected to help R10, R1 and R9; each is verified at TRL 4. | |
 
-*Table 3. Proposed, awaiting Amish.*
+*Table 3. Items proposed for Amish, decided by Amish on 2026-10-02.*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
-| A1 | Scope of the first package. Kit 1.7.0 holds tools that the concept's seven modules do not name: the release gate, the archive helper (REUSE and Zenodo), storefront cards, photoreal renders (need Blender) and the build plan picture helper. Adding them changes what the product offers. | (a) Add the release gate and archive helper to the release extra; keep photoreal renders and storefront cards for the portfolio only; build plan pictures go with the media extra. (b) Everything in the kit. (c) The seven modules only. | (a): these support document control and releases, which the pitch names; photoreal rendering needs Blender, which breaks the no-paid, offline, laptop-only promise for most users. |
-| A2 | Oldest Python version supported. The portfolio CI uses 3.12 and the measurements used 3.11. | (a) 3.10 or later; (b) 3.11 or later; (c) 3.12 only. | (a), tested in CI on the oldest and newest supported versions; it covers most university and lab machines. |
+| A1 | Scope of the first package. Kit 1.7.0 holds tools that the concept's seven modules do not name: the release gate, the archive helper (REUSE and Zenodo), storefront cards, photoreal renders (need Blender) and the build plan picture helper. Adding them changes what the product offers. | (a) Add the release gate and archive helper to the release extra; keep photoreal renders and storefront cards for the portfolio only; build plan pictures go with the media extra. (b) Everything in the kit. (c) The seven modules only. | (a): these support document control and releases, which the pitch names; photoreal rendering needs Blender, which breaks the no-paid, offline, laptop-only promise for most users. Decided by Amish, 2026-10-02: (a). |
+| A2 | Oldest Python version supported. The portfolio CI uses 3.12 and the measurements used 3.11. | (a) 3.10 or later; (b) 3.11 or later; (c) 3.12 only. | At first (a), tested in CI on the oldest and newest supported versions; it covers most university and lab machines. Decided by Amish, 2026-10-02, on the later recommendation: (b), Python 3.11 or later, tested in CI on 3.11 and the newest release, because 3.10 reaches end of life in October 2026 and the measurements were made on 3.11. |
 
 ## Consequences
 
-- `design_state: constructable` in `project.yaml`. The build plan RDK-BLD-001 shows every module and step in pictures generated from the model (`cad/src/build_plan_media.py`), and the design decisions register RDK-DEC-001 carries A1, A2 and the open items O1 to O4.
+- `design_state: constructable` in `project.yaml`. The build plan RDK-BLD-001 shows every module and step in pictures generated from the model (`cad/src/build_plan_media.py`), and the design decisions register RDK-DEC-001 carries A1, A2 and the items O1 to O4, all decided on 2026-10-02. With A2 decided as (b), the package metadata and CI matrix of build plan step 1 are for Python 3.11 and the newest release.
 - The photoreal render (`media/render-hero.png`), `media/card.png` and `media/social-preview.png` show the concept scene without the reader and the tray, so they are stale; they are made on Amish's Mac.
 - Building any of this is TRL 4 work and stays on hold.

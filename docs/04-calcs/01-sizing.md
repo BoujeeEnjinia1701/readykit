@@ -3,9 +3,9 @@ doc_id: RDK-CAL-001
 title: ReadyKit sizing and measurement note
 project: ReadyKit
 doc_type: Calculation
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-26'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: D5 reversed by Amish (RDK-DDR-002); license back to CERN-OHL-S-2.0
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Requirement table: R2 and R13 targets as restated on 2026-10-02 (RDK-DEC-001); no figure changed"
 ---
 
 # ReadyKit sizing and measurement note
@@ -104,7 +108,7 @@ Run it from the repo root with `python docs/04-calcs/sizing.py`; add `--setup` t
 | ID | Quantity | Value | Target | Status |
 | --- | --- | --- | --- | --- |
 | R1 | Setup time, empty folder to first passing check | Dependency install 32 to 47 s [F6]; full new-user trial not run | 15 min or less | Not verifiable at TRL 3 |
-| R2 | Platforms | Linux works [B1, F6]; macOS and Windows not available | Linux, macOS, Windows (native or WSL2) | Not verifiable at TRL 3 |
+| R2 | Platforms | Linux works [B1, F6]; macOS and Windows not available | Linux, macOS, Windows through WSL2 for the first release (RDK-DEC-001) | Not verifiable at TRL 3 |
 | R3 | Check time per repository | 0.12 s here; 0.27 s worst in corpus; 0.49 s at 400 documents [B1, B3, B4] | 2 s or less | Met |
 | R4 | PDF render, three documents | 3.1 s [C1] | 10 s or less | Met |
 | R5 | Media render, 20 parts, no GPU | 23 s [D2] | 60 s or less | Met |
@@ -115,7 +119,7 @@ Run it from the repo root with `python docs/04-calcs/sizing.py`; add `--setup` t
 | R10 | Kit footprint per repository | 1.05 MB [A1] | 2 MB or less | Met |
 | R11 | Configurable identity | 13 hard-coded occurrences of 5 values [A4] | None hard-coded | **Not met** |
 | R12 | Upgrade path | Manual copy; STANDARDS.md and kit code differ in 38 of 38 repositories at the same version [B7, B8] | One command with a diff | **Not met** |
-| R13 | Agent guardrails | 2 of 3 seeded faults caught [E3] | 3 of 3 | **Not met** |
+| R13 | Agent guardrails | 2 of 3 seeded faults caught [E3] | 3 of 3; the decision fault judged by the generic owner-and-date rule (RDK-DEC-001) | **Not met** |
 | R14 | Cost to user | $0.00 [F1]; all dependencies free [F2] | $0 | Met |
 | R15 | Documentation | No getting-started guide | Guide of 5 pages or fewer, plus check reference | **Not met** |
 | R16 | Open Know-How export | No exporter; 3 of 5 required fields available [F4] | Complete `okh.yml` | **Not met** |

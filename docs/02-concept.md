@@ -3,9 +3,9 @@ doc_id: RDK-PRC-001
 title: ReadyKit design precis
 project: ReadyKit
 doc_type: Design precis
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-26'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,6 +29,10 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: D5 reversed by Amish (RDK-DDR-002); license back to CERN-OHL-S-2.0; design choice 5 rewritten
+- version: "0.6"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Name, pilot users, Windows, decision-wording rule, package scope and Python version as decided on 2026-10-02 (RDK-DEC-001)"
 ---
 
 # ReadyKit design precis
@@ -111,7 +115,8 @@ ReadyKit is software and has no physical hazards of its own. Two risks matter:
 
 ## Open questions
 
-- [ ] Name: is "ReadyKit" to be used on PyPI and GitHub? The PyPI name appeared free on 2026-09-25. Proposed, awaiting Amish (O1).
-- [ ] Which external teams would pilot it (a university lab, an open science hardware group, a startup)? Proposed, awaiting Amish (O2).
-- [ ] Is Windows native support required, or is WSL2 enough? Proposed, awaiting Amish (O3).
-- [ ] Should the decision-wording check (R13) be generic, or tied to the portfolio's "Proposed, awaiting" phrase? Proposed, awaiting Amish (O4).
+- [x] Name: keep "ReadyKit"; recheck the package index just before the first release and publish the first real release under that name as soon as the package installs. The GitHub repository already exists. Decided by Amish, 2026-10-02 (O1, RDK-DEC-001).
+- [ ] Pilot users: an open science hardware group, with GOSH (Gathering for Open Science Hardware) as the first candidate to approach, recruiting two or three member projects through its community forum; a university lab as the second pilot. Decided by Amish, 2026-10-02 (O2, RDK-DEC-001).
+- [x] Windows: WSL2 for the first release; native Windows later if pilot users ask for it. Decided by Amish, 2026-10-02 (O3, RDK-DEC-001).
+- [x] Decision-wording check (R13): generic, with each repository's "still open" phrase set in its identity file, defaulting to "Proposed, awaiting". Decided by Amish, 2026-10-02 (O4, RDK-DEC-001).
+- [x] Scope of the first package: release gate and archive helper in the release extra, build plan pictures in the media extra; photoreal renders and storefront cards kept for the portfolio only. Python 3.11 or later, tested in CI on 3.11 and the newest release. Decided by Amish, 2026-10-02 (RDK-DDR-003, A1 and A2; RDK-DEC-001).

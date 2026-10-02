@@ -3,9 +3,9 @@ doc_id: RDK-BLD-001
 title: ReadyKit prototype build plan
 project: ReadyKit
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: First build plan; design made constructable (RDK-DDR-003)
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "R13 rule and Windows platform check as decided on 2026-10-02 (RDK-DEC-001)"
 ---
 
 # ReadyKit prototype build plan
@@ -148,7 +152,7 @@ The checker reads only the reader's record (Figure 5). Warnings never change the
 
 1. Move the evidence rules for levels 1 to 6 and the cap rule onto the reader's record.
 2. Add the badge writer: when the gate passes, it replaces the single badge line under the README title with one built from the claimed level. It touches no other line.
-3. Add the decision-wording rule of requirement R13: a decision written as made, with no owner and date, fails.
+3. Add the decision-wording rule of requirement R13: a decision written as made, with no owner and date, fails. The rule is generic; each repository's "still open" phrase comes from its identity file, defaulting to "Proposed, awaiting".
 
 **How it fits the parts next to it.**
 
@@ -326,7 +330,7 @@ These are the checks a TRL 4 test report would record; this plan only lists them
 | Check | Requirement | How | Pass when |
 | --- | --- | --- | --- |
 | Setup time | R1 | A person new to the kit, on a clean Linux or macOS machine with Python, from an empty folder | First passing check in 15 min or less |
-| Platforms | R2 | CI on Linux, macOS and Windows (native or the Linux subsystem) | Check and render pass on all three |
+| Platforms | R2 | CI on Linux, macOS and Windows through the Linux subsystem (WSL2) | Check and render pass on all three |
 | Check time | R3 | Time the check on this repository and on the largest portfolio repository | 2 s or less |
 | PDF time | R4 | Render three documents | 10 s or less |
 | Media time | R5 | Render a 20-part model with cutaway and exploded views, no graphics card | 60 s or less |
