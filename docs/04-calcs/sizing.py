@@ -387,6 +387,29 @@ def sec_e(tmp, env):
     return {"cov": (n_hit, len(PROBES)), "guard": (sum(h for _, h in g), len(g)), "mism": len(mism)}
 
 
+# ---------------------------------------------------------------- section G: design record (2026-10-02 decisions)
+def sec_g():
+    """Counts that follow from the decisions of 2026-10-02, read from the massing model so the note and
+    the model cannot disagree (RDK-DEC-001): identity values, package extras, CI platforms, Python range."""
+    sys.path.insert(0, str(ROOT / "cad" / "src"))
+    from model import PARAMS, check
+    fields = PARAMS["identity_fields"]
+    out("G1", f"Identity values the reader hands on: {len(fields)} ({', '.join(fields)}); the sixth, the still-open phrase "
+              f"of the decision-wording rule (R13), defaults to 'Proposed, awaiting' and is hard-coded nowhere in the kit today", len(fields))
+    bays = PARAMS["tray_bays"]
+    out("G2", f"Install bays: core plus {len(bays) - 1} extras ({', '.join(bays[1:])}); release gate and archive helper in the release extra, "
+              f"build plan pictures in the media extra, photoreal renders and storefront cards not packaged", len(bays) - 1)
+    plats = ["Linux", "macOS", "Windows through WSL2"]
+    out("G3", f"CI platforms for the first release: {len(plats)} ({', '.join(plats)}); native Windows later if pilot users ask", len(plats))
+    py = (3, 11)
+    ok = sys.version_info[:2] >= py
+    out("G4", f"Oldest Python supported {py[0]}.{py[1]}; CI matrix is {py[0]}.{py[1]} and the newest release; this measurement run used "
+              f"{platform.python_version()} ({'at or above' if ok else 'BELOW'} the floor)", f"{py[0]}.{py[1]}")
+    fails = check(verbose=False)
+    out("G5", f"Massing model constructability checks: {len(fails)} failures", len(fails))
+    return {}
+
+
 # ---------------------------------------------------------------- section F: cost, licenses, interop, setup
 def sec_f(setup: bool, tmp):
     rows = list(csv.DictReader((ROOT / "bom/bom.csv").open()))
@@ -438,7 +461,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--setup", action="store_true")
     ap.add_argument("--corpus", default="/home/claude/trl3")
+    ap.add_argument("--design-only", action="store_true", help="run section G only and update its rows in results.csv")
     a = ap.parse_args()
+    if a.design_only:
+        sec_g()
+        keep = [row for row in csv.reader((HERE / "results.csv").open()) if row and not row[0].startswith("G")]
+        with (HERE / "results.csv").open("w", newline="") as f:
+            w = csv.writer(f)
+            w.writerows(keep)
+            for tag, text, value in RESULTS:
+                w.writerow([tag, value, text.split("\n")[0]])
+        return
     corpus = Path(a.corpus) if a.corpus else None
     with tempfile.TemporaryDirectory(prefix="rdk-cal-") as t:
         tmp = Path(t)
@@ -450,6 +483,7 @@ def main():
         r.update(sec_d(tmp, env))
         r.update(sec_e(tmp, env))
         r.update(sec_f(a.setup, tmp))
+        r.update(sec_g())
     with (HERE / "results.csv").open("w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["tag", "value", "line"])

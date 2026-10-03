@@ -3,7 +3,7 @@ doc_id: RDK-CAL-001
 title: ReadyKit sizing and measurement note
 project: ReadyKit
 doc_type: Calculation
-version: "0.4"
+version: "0.5"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -25,6 +25,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Requirement table: R2 and R13 targets as restated on 2026-10-02 (RDK-DEC-001); no figure changed"
+- version: "0.5"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "New section G from sizing.py: identity values, package extras, CI platforms, Python floor and model checks after the 2026-10-02 follow-ups; no measured figure and no requirement status changed"
 ---
 
 # ReadyKit sizing and measurement note
@@ -101,6 +105,20 @@ Run it from the repo root with `python docs/04-calcs/sizing.py`; add `--setup` t
 - **Sheets.** The drawing generator supports 1 sheet size, ANSI B, fixed as module constants [F5]. R17 is not met.
 - **Setup.** A fresh virtual environment plus `pip install` of the kit requirements took 32 to 47 s over six runs and installed 1.09 GB; the check then passed [F6]. That is under 5% of R1's 15 minutes, but it excludes WeasyPrint's system libraries, Python itself and a new user reading instructions. R1 is not verifiable at TRL 3.
 
+## Design record counts after the 2026-10-02 decisions
+
+*Table 1a. Counts read from the massing model by `sizing.py` section G (run with `--design-only`).*
+
+| Tag | Quantity | Value |
+| --- | --- | --- |
+| G1 | Identity values handed on by the reader | 6, the sixth being the still-open phrase (default "Proposed, awaiting") |
+| G2 | Extras beside the core install | 4: PDF, drawings, media, release (release gate and archive helper in the release extra; build plan pictures in the media extra) |
+| G3 | CI platforms for the first release | 3: Linux, macOS, Windows through WSL2 |
+| G4 | Oldest Python supported | 3.11; CI on 3.11 and the newest release; this run used 3.11.15 |
+| G5 | Massing model checks failing | 0 |
+
+No timing or size changed, so sections A to F were not re-run.
+
 ## Results
 
 *Table 2. Every requirement in RDK-REQ-001 v0.4 against the measurements. Worst value of the repeat runs.*
@@ -108,7 +126,7 @@ Run it from the repo root with `python docs/04-calcs/sizing.py`; add `--setup` t
 | ID | Quantity | Value | Target | Status |
 | --- | --- | --- | --- | --- |
 | R1 | Setup time, empty folder to first passing check | Dependency install 32 to 47 s [F6]; full new-user trial not run | 15 min or less | Not verifiable at TRL 3 |
-| R2 | Platforms | Linux works [B1, F6]; macOS and Windows not available | Linux, macOS, Windows through WSL2 for the first release (RDK-DEC-001) | Not verifiable at TRL 3 |
+| R2 | Platforms | Linux works [B1, F6]; macOS and Windows not available; CI matrix of 3 platforms and Python 3.11 and newest planned [G3, G4] | Linux, macOS, Windows through WSL2 for the first release (RDK-DEC-001) | Not verifiable at TRL 3 |
 | R3 | Check time per repository | 0.12 s here; 0.27 s worst in corpus; 0.49 s at 400 documents [B1, B3, B4] | 2 s or less | Met |
 | R4 | PDF render, three documents | 3.1 s [C1] | 10 s or less | Met |
 | R5 | Media render, 20 parts, no GPU | 23 s [D2] | 60 s or less | Met |
@@ -117,7 +135,7 @@ Run it from the repo root with `python docs/04-calcs/sizing.py`; add `--setup` t
 | R8 | Reproducible output | Text 5 of 5 PDFs [C3]; images 4 of 4 [D3] | Identical apart from date and commit | Met |
 | R9 | Offline use | Check and render pass with no network [C4] | No network needed | Met (viewer page excepted) |
 | R10 | Kit footprint per repository | 1.05 MB [A1] | 2 MB or less | Met |
-| R11 | Configurable identity | 13 hard-coded occurrences of 5 values [A4] | None hard-coded | **Not met** |
+| R11 | Configurable identity | 13 hard-coded occurrences of 5 values [A4]; the sixth value, the still-open phrase, is hard-coded nowhere [G1] | None hard-coded | **Not met** |
 | R12 | Upgrade path | Manual copy; STANDARDS.md and kit code differ in 38 of 38 repositories at the same version [B7, B8] | One command with a diff | **Not met** |
 | R13 | Agent guardrails | 2 of 3 seeded faults caught [E3] | 3 of 3; the decision fault judged by the generic owner-and-date rule (RDK-DEC-001) | **Not met** |
 | R14 | Cost to user | $0.00 [F1]; all dependencies free [F2] | $0 | Met |

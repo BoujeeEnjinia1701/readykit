@@ -31,6 +31,8 @@ from model import modules, laptop  # noqa: E402
 OUT = ROOT / "docs" / "05-build-plan"
 DWG = ROOT / "cad" / "drawings"
 DATE = "2026-10-01"
+DATE2 = "2026-10-02"          # date of the revision that carried out the decisions of 2026-10-02
+REV2 = {"template", "reader", "gate"}   # making sketches revised to P2 on 2026-10-02
 INK, MUTED, ACCENT, FAIL = "#111827", "#4B5563", "#0F766E", "#C2410C"
 
 M = {no: (name, shape, color) for no, name, shape, color, _ in modules()}
@@ -69,18 +71,23 @@ MODS = {
         dwg="RDK-DWG-101", title="Template repository and CI workflow: making sketch",
         material="Software: Python package skeleton, GitHub template repository, CI workflow; MIT",
         reads=["Folder layout of a portfolio repository", "Controlled-document template", "License texts (MIT; CERN-OHL-S v2)"],
-        inside=["Package skeleton with a version number", "Per-repository stub, about 47 kB", "CI workflow: check on every push", "Release job: PDFs on a document tag"],
+        inside=["Package skeleton with a version number", "Per-repository stub, about 47 kB", "CI workflow: Linux, macOS, Windows (WSL2)", "Release job: PDFs on a document tag"],
         writes=["A new repository, ready to check", "A pass or fail on every push", "PDFs attached to a release"],
         sizes=["Stub in each repository: about 47 kB (today 1.20 MB of kit)", "Check job installs the core only: about 5 MB",
-               "Release job installs every extra: about 1.1 GB"],
+               "Release job installs every extra: about 1.1 GB",
+               "Python 3.11 or later; CI on 3.11 and the newest release"],
         notes=["Make it first, so every later module is checked by CI from day one.",
-               "1. Start an empty package with a version number and a license file.",
+               "1. Start an empty package with a version number, a license file and",
+               "   Python 3.11 or later; list the four extras (PDF, drawings,",
+               "   media, release), each with its libraries.",
                "2. Copy the folder layout of a finished repository into the template:",
                "   docs, cad, bom, media, the license files and the citation file.",
                "3. Write the stub: the version pin, the identity file, the agent rules",
                "   and commands, and a copy of the standard. No code, no fonts.",
                "4. Write the CI workflow: check on every push and pull request with",
-               "   the core install; render and publish PDFs on a release tag only.",
+               "   the core install, on Linux, macOS and Windows through WSL2, on",
+               "   Python 3.11 and the newest release; render and publish PDFs on",
+               "   a release tag only.",
                "Fits: the stub is the only kit content inside a repository (joint 6);",
                "the check job reads the checker's exit code (joint 2).",
                "Check: the template repository passes the check before any other",
@@ -88,16 +95,18 @@ MODS = {
     "reader": dict(
         dwg="RDK-DWG-102", title="Repository reader: making sketch",
         material="Software: Python, PyYAML; MIT",
-        reads=["Project file (name, TRL, evidence list)", "Identity file (organisation, colours)", "Phase file (TRL cap)",
+        reads=["Project file (name, TRL, evidence list)", "Identity file (six values, with the still-open phrase)", "Phase file (TRL cap)",
                "Front matter of every controlled document", "Bill of materials (numbered lines)"],
         inside=["One loader per source", "Defaults for any missing identity value", "Clear error naming the file and the line"],
         writes=["One record of the repository, used by every other module"],
         sizes=["Five sources, read once per run", "Replaces eight separate reads of the project file in seven scripts",
-               "Identity defaults: the Design Molecule values"],
+               "Identity defaults: the Design Molecule values;", "still-open phrase: Proposed, awaiting"],
         notes=["New for construction (RDK-DDR-003, change P1).",
                "1. Write one loader for each of the five sources in the interface view.",
                "2. Give every identity value a default, so a repository with no",
                "   identity file still renders with the Design Molecule values.",
+               "   The sixth value is the still-open phrase, default Proposed,",
+               "   awaiting.",
                "3. When a file cannot be read, stop with the file name and line;",
                "   never fall back silently to an empty value.",
                "4. Hand back one record. No other module opens these files itself.",
@@ -130,7 +139,8 @@ MODS = {
     "gate": dict(
         dwg="RDK-DWG-104", title="TRL gate and badge: making sketch",
         material="Software: Python; MIT",
-        reads=["Claimed TRL and target (project file)", "Evidence files for each level", "TRL cap (phase file)"],
+        reads=["Claimed TRL and target (project file)", "Evidence files for each level", "TRL cap (phase file)",
+               "Still-open phrase (identity file)"],
         inside=["Evidence rules for TRL 1 to 6", "Phase cap rule", "Badge writer (README line and PDF cover)"],
         writes=["Pass or fail for the claimed TRL", "README badge line", "TRL on every PDF cover"],
         sizes=["Evidence rules: TRL 1 to 6 today", "Badge: one line, rewritten only when the TRL changes",
@@ -140,7 +150,8 @@ MODS = {
                "   badge line at the top of the README from the claimed TRL, so",
                "   the badge can no longer disagree with the project file.",
                "3. Add the decision-wording rule of R13: a decision written as",
-               "   made with no owner and date fails (wording still open, O4).",
+               "   made with no owner and date fails; the still-open phrase comes",
+               "   from the identity file, default Proposed, awaiting.",
                "Fits: reads the reader's record (joint 1); the badge line and the",
                "PDF cover take the same TRL value (joint 3).",
                "Check: a TRL claimed one level above its evidence fails; the",
@@ -279,20 +290,25 @@ def interface_png(key, path):
     return path, height
 
 
-def sheets():
+def sheets(only=None):
     from drawing import Sheet
     outs = []
     for i, (key, no, name, _, _) in enumerate(ORDER):
-        if key not in MODS:
+        if key not in MODS or (only and key not in only):
             continue
         d = MODS[key]
         work = DWG / f"_{d['dwg']}_views"; work.mkdir(parents=True, exist_ok=True)
         png, ih = interface_png(key, work / "interface.png")
         others = [P[k] for k, *_ in ORDER if k != key]
         inset = bv.where_it_goes(P[key], others, work / "where.png")
-        s = Sheet(project="ReadyKit", title=d["title"], dwg_no=d["dwg"], rev="P1", author="Amish Chadha", date=DATE,
+        rev2 = key in REV2
+        revs = [("P1", "Making sketch for the prototype build plan", DATE, "AC")]
+        if rev2:
+            revs.append(("P2", "Decisions of 2026-10-02 carried in (CI platforms, Python range, identity phrase)", DATE2, "AC"))
+        s = Sheet(project="ReadyKit", title=d["title"], dwg_no=d["dwg"], rev="P2" if rev2 else "P1", author="Amish Chadha",
+                  date=DATE2 if rev2 else DATE,
                   concept="BUILD PLAN SKETCH, PLAN NOT YET BUILT", scale=None, units="n/a (software)",
-                  material=d["material"], revisions=[("P1", "Making sketch for the prototype build plan", DATE, "AC")])
+                  material=d["material"], revisions=revs)
         s.add_image(str(png), 16, 26, 240, ih, label="Interface view",
                     sublabel="What the module reads, the parts inside it and what it hands on; not to scale")
         s.add_image(str(inset), 276, 30, 140, 70, label="Where it goes",
@@ -323,7 +339,8 @@ JOINTS = [
      ["Exit code 0: every rule passed; the merge may go on.", "Exit code 1: at least one fault; CI blocks the merge.",
       "Each fault is one line: the file, then the reason.", "Warnings never change the exit code.",
       "The check job installs the core only (about 5 MB:", "PyYAML, Python-Markdown and Jinja2).",
-      "Runs on every push and every pull request.", "Time budget: 2 s per repository (R3)."]),
+      "Runs on every push and every pull request.", "Time budget: 2 s per repository (R3).",
+      "CI platforms: Linux, macOS, Windows through WSL2;", "Python 3.11 and the newest release."]),
     ("joint-03.png", "Joint 3: TRL gate to the README badge and the PDF cover", ["gate", "checker", "pdf"],
      "One TRL value, written in two places by the same module",
      ["The gate passes the claimed TRL only when its", "evidence is present and it is within the cap.",
@@ -331,8 +348,8 @@ JOINTS = [
       "PDF cover: TRL number and name, beside the", "document control table.",
       "If the gate fails, neither is written."]),
     ("joint-04.png", "Joint 4: identity values to the three renderers", ["reader", "pdf", "drawing"],
-     "Organisation, website, repository owner, author and colours come from one file",
-     ["The reader fills every missing value with the", "Design Molecule default.",
+     "Organisation, website, repository owner, author, colours and the still-open phrase come from one file",
+     ["The reader fills every missing value with the", "Design Molecule default; the still-open phrase", "of the decision-wording rule defaults to", "Proposed, awaiting.",
       "The PDF renderer uses all five values;", "the sheet generator uses organisation, website,",
       "owner and colours; the media renderer uses", "organisation, owner and colours.",
       "No renderer holds an identity string of its own:", "13 written-in strings today, none after (R11)."]),
@@ -389,7 +406,7 @@ def joints():
 # ----------------------------------------------------------------- assembly steps
 STEPS = [
     ("template", "Step 1: template repository and CI workflow", "The folder every other module goes into; CI checks it from the first commit"),
-    ("bought", "Step 2: bought open-source parts", "Core libraries first; each extra is added at the step that needs it"),
+    ("bought", "Step 2: bought open-source parts", "Core libraries first; the PDF, drawings, media and release extras each go in at the step that needs them"),
     ("reader", "Step 3: repository reader", "Hold point: its records match the present scripts on 38 repositories"),
     ("checker", "Step 4: document control checker", "Hold point: every seeded fault caught; no false failures"),
     ("gate", "Step 5: TRL gate and badge", "The badge line and the PDF cover take the gate's TRL"),
@@ -421,7 +438,7 @@ if __name__ == "__main__":
     if "overview" in what:
         print(overview())
     if "sheets" in what:
-        for s in sheets():
+        for s in sheets(REV2):
             print(s)
     if "joints" in what:
         for j in joints():

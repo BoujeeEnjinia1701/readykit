@@ -27,3 +27,8 @@ F3,1,Direct dependencies with a copyleft license: cairosvg; all are free of char
 F4,3,"Open Know-How manifest 1.0 required fields available from project.yaml: 3 of 5; missing: manifest-author name, project-link or documentation-home"
 F5,1,"Sheet sizes the drawing generator supports: 1 (ANSI B, fixed module constants W, H)"
 F6,39,"Fresh virtual environment plus pip install of the kit requirements: 39 s, exit 0, 1.09 GB installed; check then passes: True (system libraries for WeasyPrint were already present)"
+G1,6,"Identity values the reader hands on: 6 (organisation, website, repository owner, author, colours, still-open phrase); the sixth, the still-open phrase of the decision-wording rule (R13), defaults to 'Proposed, awaiting' and is hard-coded nowhere in the kit today"
+G2,4,"Install bays: core plus 4 extras (pdf, drawings, media, release); release gate and archive helper in the release extra, build plan pictures in the media extra, photoreal renders and storefront cards not packaged"
+G3,3,"CI platforms for the first release: 3 (Linux, macOS, Windows through WSL2); native Windows later if pilot users ask"
+G4,3.11,Oldest Python supported 3.11; CI matrix is 3.11 and the newest release; this measurement run used 3.11.15 (at or above the floor)
+G5,0,Massing model constructability checks: 0 failures

@@ -15,6 +15,11 @@ RDK-DDR-003 (design for construction, 2026-10-01) added two objects: the reposit
 tray of bought open-source parts (BOM 8, 10, 11 and 13). The fanned document stack is now
 centred on the folder so no page hangs over its edge.
 
+RDK-DDR-003 follow-ups carried out on 2026-10-02 (decisions of the same day): the identity card in the
+reader carries six field tabs, the sixth being the "still open" phrase of the decision-wording rule
+(decision 4); the tray has five bays, one for the core libraries and one for each extra: PDF, drawings,
+media and release (decisions 5 and 6).
+
 Coordinates in mm, desk surface at Z = 0, X to the right, Y away from the viewer.
 Paper thickness is exaggerated so the sheets read in the renders.
 """
@@ -46,8 +51,14 @@ PARAMS = {
     "reader_wall": 3.0,
     "reader_cards": 5,                # one card per thing it reads: project file, identity, phase, front matter, BOM
     "reader_at": (287.0, 80.0),
+    "identity_fields": ["organisation", "website", "repository owner", "author", "colours", "still-open phrase"],
+    "tab": (7.0, 1.0, 5.0),           # one tab per identity field, standing on the identity card: width, thickness, height
+    "tab_pitch": 8.5,
     "tray": (110.0, 80.0, 20.0),      # tray of bought open-source parts: width, depth, height
     "tray_at": (185.0, -100.0),
+    "tray_bays": ["core", "pdf", "drawings", "media", "release"],   # core libraries, then one bay per extra
+    "bay": (18.0, 60.0),              # bay width and depth (heights vary with the contents)
+    "bay_pitch": 20.5,
     "laptop": (320.0, 225.0, 18.0),   # 14 in class laptop for scale (context only, not exported)
 }
 
@@ -127,13 +138,23 @@ def modules(p=PARAMS):
     for i in range(n):
         ch = rh - 2 + (6 if i % 2 else 12)          # cards stand proud of the box, alternate heights
         reader = reader + Pos(rx, ry - (rd - 2 * wt) / 2 + 5 + i * pitch, wt + ch / 2) * Box(rw - 2 * wt - 2, 1.0, ch)
+    # identity card (second card): one tab per identity field, the last for the "still open" phrase (decision 4)
+    tbw, tbt, tbh = p["tab"]
+    nf = len(p["identity_fields"])
+    ich = rh - 2 + 6
+    for j in range(nf):
+        reader = reader + Pos(rx + (j - (nf - 1) / 2) * p["tab_pitch"], ry - (rd - 2 * wt) / 2 + 5 + pitch,
+                              wt + ich + tbh / 2 - 0.5) * Box(tbw, tbt, tbh + 1.0)
 
     # 10  Bought open-source parts (fonts, libraries, system libraries, viewer script): an open tray
     tw_, td, th_ = p["tray"]
     ux, uy = p["tray_at"]
     tray = Pos(ux, uy, th_ / 2) * Box(tw_, td, th_) - Pos(ux, uy, th_ / 2 + 2) * Box(tw_ - 4, td - 4, th_)
-    for k2, (bw, bd, bh) in enumerate([(28, 60, 24), (28, 60, 30), (28, 60, 18)]):
-        tray = tray + Pos(ux - 34 + k2 * 34, uy, 2 + bh / 2) * Box(bw, bd, bh)
+    nb = len(p["tray_bays"])
+    bw, bd = p["bay"]
+    heights = [24, 30, 18, 26, 20][:nb] + [22] * max(nb - 5, 0)
+    for k2, bh in enumerate(heights):
+        tray = tray + Pos(ux + (k2 - (nb - 1) / 2) * p["bay_pitch"], uy, 2 + bh / 2) * Box(bw, bd, bh)
 
     return [
         (1, "Controlled document set (PRB, PRC, REQ)", stack, "#F3F4F6", (0, 0, 120)),
@@ -196,6 +217,33 @@ def check(p=PARAMS, verbose=True):
     n += 1
     if sb.min.X < fb.min.X or sb.max.X > fb.max.X or sb.min.Y < fb.min.Y or sb.max.Y > fb.max.Y:
         fails.append("document stack hangs over the folder edge")
+    # identity tabs: one per field, all on the identity card inside the reader box
+    rw, rd, rh = p["reader"]
+    nf = len(p["identity_fields"])
+    n += 1
+    if nf * p["tab_pitch"] > rw - 2 * p["reader_wall"]:
+        fails.append("identity tabs do not fit across the identity card")
+    n += 1
+    if p["identity_fields"][-1] != "still-open phrase":
+        fails.append("the still-open phrase is not an identity field (decision 4)")
+    n += 1
+    if p["tab"][0] >= p["tab_pitch"]:
+        fails.append("identity tabs touch each other")
+    n += 1
+    if p["reader_cards"] != 5:
+        fails.append("the reader has one card for each of its five sources")
+    # tray bays: one for the core and one for each extra, inside the tray and clear of each other (decisions 5 and 6)
+    tw_, td, th_ = p["tray"]
+    nb = len(p["tray_bays"])
+    n += 1
+    if p["tray_bays"][0] != "core" or set(p["tray_bays"][1:]) != {"pdf", "drawings", "media", "release"}:
+        fails.append("tray bays must be core, pdf, drawings, media and release")
+    n += 1
+    if nb * p["bay_pitch"] - (p["bay_pitch"] - p["bay"][0]) > tw_ - 4 or p["bay"][1] > td - 4:
+        fails.append("tray bays do not fit inside the tray")
+    n += 1
+    if p["bay"][0] > p["bay_pitch"] - 1.5:
+        fails.append("tray bays are closer than 1.5 mm")
     if verbose:
         print(f"{n} checks, {len(fails)} failures")
         for f in fails:

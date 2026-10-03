@@ -3,7 +3,7 @@ doc_id: RDK-BLD-001
 title: ReadyKit prototype build plan
 project: ReadyKit
 doc_type: Build plan
-version: "0.2"
+version: "0.4"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -17,6 +17,14 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: "R13 rule and Windows platform check as decided on 2026-10-02 (RDK-DEC-001)"
+  - version: "0.3"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Section 2: the changes recorded in RDK-DDR-003 accepted by Amish on 2026-10-02"
+  - version: "0.4"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Decisions of 2026-10-02 carried into the plan and pictures: CI platforms and Python range, identity phrase, package extras"
 ---
 
 # ReadyKit prototype build plan
@@ -35,7 +43,7 @@ The prototype is the first standalone ReadyKit: an installable Python package an
 
 ## 2. What changed to make it buildable
 
-The concept described what the kit does; five of its joints were missing or could not work as described, and the illustration needed two more objects. Each change keeps what ReadyKit does, and all of them are recorded in decision record RDK-DDR-003, open for Amish's review.
+The concept described what the kit does; five of its joints were missing or could not work as described, and the illustration needed two more objects. Each change keeps what ReadyKit does, and all of them are recorded in decision record RDK-DDR-003, accepted by Amish on 2026-10-02.
 
 *Table 1. Changes from the concept.*
 
@@ -62,10 +70,10 @@ Make and check each component before the step that needs it. For software, each 
 
 **How to make it.**
 
-1. Start an empty package with a version number, a license file and the four optional extras named in Table 1 (PDF, drawings, media, release), each listing its libraries.
+1. Start an empty package with a version number, a license file, the requirement that Python is 3.11 or later, and the four optional extras named in Table 1 (PDF, drawings, media, release), each listing its libraries. The release extra holds the release gate and the archive helper; the media extra holds the build plan pictures; photoreal renders and storefront cards stay in the portfolio and are not packaged.
 2. Copy the folder layout of a finished portfolio repository into the template: documents, CAD, parts list and media folders, both license files and the citation file. Leave out every project-specific file.
 3. Write the stub that setup will put into each repository: the version pin, an identity file filled with the Design Molecule values, the agent rules and session commands, and a copy of the standard. It holds no code and no fonts and comes to about 47 kB.
-4. Write the CI workflow: on every push and every pull request, install the core only and run the check; on a release tag, install every extra, render the PDFs and attach them to the release.
+4. Write the CI workflow: on every push and every pull request, install the core only and run the check on Linux, on macOS and on Windows through WSL2, each on Python 3.11 and on the newest Python release; on a release tag, install every extra, render the PDFs and attach them to the release.
 
 **How it fits the parts next to it.**
 
@@ -82,7 +90,7 @@ The stub is the only part of the kit that lives inside a project repository. The
 Buy to specification, not brand; every item is free. Line numbers are those of the bill of materials.
 
 - **Core libraries (line 10).** A YAML reader, a Markdown converter and a template engine; about 5 MB installed. Enough for the check and the gate.
-- **Extras (line 10).** PDF: a web-page-to-PDF converter. Drawings: an SVG converter and the build123d CAD library. Media: build123d, a numerical library, a plotting library and an image library. Release: the REUSE tool and a citation-file validator. About 1.1 GB with every extra.
+- **Extras (line 10).** PDF: a web-page-to-PDF converter. Drawings: an SVG converter and the build123d CAD library. Media: build123d, a numerical library, a plotting library and an image library. Release: the release gate, the archive helper, the REUSE tool and a citation-file validator. About 1.1 GB with every extra.
 - **System libraries for PDF output (line 11).** Pango and fontconfig, from the operating system's package manager; needed only with the PDF extra.
 - **Fonts (line 8).** IBM Plex Sans and Mono under the SIL Open Font License, shipped inside the package.
 - **3D viewer script (line 13).** A pinned version of the model-viewer web component under Apache-2.0, with its license notice.
@@ -101,7 +109,7 @@ Check each license against the audit in the calculation note before adding it; n
 **How to make it.**
 
 1. Write one loader for each of the five sources: the project file, the identity file, the phase file, the header block of every controlled document, and the parts list.
-2. Give every identity value (organisation, website, repository owner, author, colours) a default, so a repository with no identity file still renders with the Design Molecule values.
+2. Give every identity value (organisation, website, repository owner, author, colours and the phrase that marks a decision as still open) a default, with "Proposed, awaiting" as the default phrase, so a repository with no identity file still renders with the Design Molecule values.
 3. When a file cannot be read, stop with the file name and line number. Never fall back silently to an empty value.
 4. Hand back one record. Take the repository address from the project file's repository line, never from a name written into the code.
 
@@ -111,7 +119,7 @@ Check each license against the audit in the calculation note before adding it; n
 
 *Figure 5. The reader hands over one record; neither module opens a file itself.*
 
-The checker and the gate read the document and project parts of the record (Figure 5). The PDF renderer, sheet generator and media renderer read its identity part (Figure 11).
+The checker and the gate read the document and project parts of the record (Figure 5). The PDF renderer, sheet generator and media renderer read its identity part (Figure 11), and the readiness gate reads the still-open phrase from it (Figure 9).
 
 **Check before moving on.** Run the reader on the 38 finished portfolio repositories: every field of every record matches what the present scripts read, and the repository address is the same for all of them.
 
@@ -183,7 +191,7 @@ The PDF renderer takes the level for each cover from the gate, never from the pr
 
 ![Figure 11. Joint 4: identity values to the three renderers](05-build-plan/joint-04.png)
 
-*Figure 11. Organisation, website, repository owner, author and colours come from one place.*
+*Figure 11. Organisation, website, repository owner, author, colours and the still-open phrase come from one place.*
 
 The page is US Letter, 216 x 279 mm, with 20 mm margins. The readiness level on the cover comes from the gate (Figure 9).
 
@@ -271,7 +279,7 @@ Publish the package skeleton and the template as a private test repository first
 
 ![Step 2](05-build-plan/step-02.png)
 
-Add the core libraries to the package now. Add each extra at the step that first needs it: PDF at step 6, drawings at step 7, media at step 8, release when the release gate is added.
+Add the core libraries to the package now. Add each extra at the step that first needs it: PDF at step 6, drawings at step 7, media (with the build plan pictures) at step 8, release (with the release gate and the archive helper) when the release gate is added.
 
 ### Step 3: repository reader
 
@@ -360,7 +368,7 @@ Stop at each point. Carry on only when everything listed is true.
 
 ## 7. Tools, skills and workspace
 
-**Tools.** A laptop with Python 3, Git and a text editor; a GitHub account with Actions enabled; Pango and fontconfig from the system package manager; access to a macOS and a Windows machine, or CI runners for them, for the platform checks.
+**Tools.** A laptop with Python 3.11 or later, Git and a text editor; a GitHub account with Actions enabled; Pango and fontconfig from the system package manager; access to a macOS and a Windows machine, or CI runners for them, for the platform checks.
 
 **Skills.** Python packaging and testing, YAML, Markdown, Git and GitHub Actions. No engineering trade skill is needed to build the kit, but a person with engineering review experience should set the hazard-word list of the safety-note rule.
 
@@ -370,9 +378,9 @@ Stop at each point. Carry on only when everything listed is true.
 
 - Model and illustration checks: `cad/src/model.py` (`python cad/src/model.py --check`); STEP and STL exports in `cad/step/` and `cad/stl/`.
 - Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/RDK-DWG-101` to `RDK-DWG-108`.
-- General arrangement: `cad/drawings/RDK-DWG-001.pdf`, Rev P4.
-- Calculations: `docs/04-calcs/01-sizing.md` (RDK-CAL-001 v0.3) and `docs/04-calcs/sizing.py`: check, PDF and media times, rule coverage, kit size and the license audit.
+- General arrangement: `cad/drawings/RDK-DWG-001.pdf`, Rev P5.
+- Calculations: `docs/04-calcs/01-sizing.md` (RDK-CAL-001 v0.5) and `docs/04-calcs/sizing.py`: check, PDF and media times, rule coverage, kit size and the license audit.
 - Bill of materials: `bom/bom.csv` and `bom/bom-notes.md`.
 - Decisions: `docs/decisions/0003-design-for-construction.md` (RDK-DDR-003), with RDK-DDR-001 and RDK-DDR-002.
-- Requirements: `docs/03-requirements.md` (RDK-REQ-001 v0.5).
+- Requirements: `docs/03-requirements.md` (RDK-REQ-001 v0.7).
 - Names used in this plan: the project file is `project.yaml`; the identity file is `readykit.yaml`; the phase file is `PHASE.yaml`; the standard is `STANDARDS.md`; the agent rules are `CLAUDE.md` with the commands in `.claude/commands/`; the present kit code is in `.kit/` (`render.py`, `drawing.py`, `concept.py`); the CI workflow is `.github/workflows/docs.yml`.

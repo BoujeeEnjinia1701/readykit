@@ -21,7 +21,7 @@ parts = [Part(name, shape, color, no, explode) for no, name, shape, color, explo
 context = [Part("Laptop, 14 in class", laptop(), "#C8CDD3")]
 
 outs = render_all(
-    parts, project="ReadyKit", title="Illustrative massing, software project", dwg_no="RDK-DWG-010", rev="P4",
+    parts, project="ReadyKit", title="Illustrative massing, software project", dwg_no="RDK-DWG-010", rev="P5",
     key_figures=["ILLUSTRATIVE, SOFTWARE PROJECT",
                  "Inputs: Markdown with YAML front matter, build123d Python",
                  "Check: about 0.1 s per repo (measured, RDK-CAL-001)",

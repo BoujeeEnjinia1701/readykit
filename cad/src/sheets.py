@@ -137,6 +137,8 @@ def main():
     L.append(_t(130, 170.5, "project model.py exports STEP and STL (not a kit module)", 2.0, 400, MUTED, "middle"))
     # repository reader (RDK-DDR-003, P1)
     L += box(18, 148, 56, 22, "Repository reader", ["reads every input once;", "one record to modules 1 to 5", "(new, DDR-003)"], no=12)
+    # package extras (decisions 5 and 6 of 2026-10-02)
+    L += box(152, 128, 58, 17, "Package extras", ["pdf, drawings, media, release;", "release: gate, archive helper"], no=10)
     # guardrails and template/CI band
     L += box(18, 178, 110, 24, "Agent guardrails", ["CLAUDE.md: TRL cap, decision rights, one step per session,",
                                                    "review note; .claude/commands/: populate, advance-trl3,",
@@ -144,18 +146,20 @@ def main():
     L += box(136, 178, 130, 24, "Template repository and CI workflow", [
         ".github/workflows/docs.yml: check on every push and pull request;",
         "render and publish PDFs on release tags <ID>/v<ver> and <DWG>/rev<X>.",
-        "Pip package plus template (D1); 47 kB stub per repo; core install for the check (DDR-003)."], no=7)
+        "Pip package plus template (D1); 47 kB stub; check on Linux, macOS, Windows (WSL2);",
+        "Python 3.11 and the newest release; core install for the check (DDR-003)."], no=7)
     L.append(f'<rect x="14" y="24" width="256" height="182" fill="none" stroke="{MUTED}" stroke-width="0.3" stroke-dasharray="3 1.5"/>')
     L.append(_t(16, 209.5, "Dashed boundary: one project repository (item 7). Modules 1 to 5 and 12 come from the pip package; the repository keeps a stub.",
                 2.1, 400, MUTED))
 
-    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P4", license="CERN-OHL-S-2.0",
-                     author="Amish Chadha", date="2026-10-01", scale=None, units="mm (iso view)", theme="technical",
+    s = DiagramSheet(project="ReadyKit", title="General arrangement: documentation pipeline", dwg_no="RDK-DWG-001", rev="P5", license="CERN-OHL-S-2.0",
+                     author="Amish Chadha", date="2026-10-02", scale=None, units="mm (iso view)", theme="technical",
                      material="Software; nothing to fabricate. Massing is illustrative. PRELIMINARY, NOT FOR FABRICATION",
                      revisions=[("P1", "Preliminary GA for TRL 3 (pipeline layout, cad/src/model.py)", DATE, "AC"),
                                ("P2", "Recommendations accepted (DDR-002): D5 content license; D1, D3 decided", DATE, "AC"),
                                ("P3", "D5 reversed (DDR-002): back to CERN-OHL-S-2.0", "2026-09-26", "AC"),
-                               ("P4", "Design for construction (DDR-003): reader, stub, core install, badge", "2026-10-01", "AC")])
+                               ("P4", "Design for construction (DDR-003): reader, stub, core install, badge", "2026-10-01", "AC"),
+                               ("P5", "Decisions of 2026-10-02: package extras, CI platforms, identity phrase", "2026-10-02", "AC")])
     s._layers += L
     work = ROOT / "cad" / "drawings" / "_views"
     iso = safe_iso(assembly(), work)
@@ -174,6 +178,8 @@ def main():
         f"Sheet {PARAMS['sheet']} {D['sheet_w']} x {D['sheet_h']} mm; ISO A3 420 x 297 decided (D3)",
         "Page US Letter 216 x 279 mm, 20 mm margins",
         "Stub per repository about 47 kB; check needs the core install only (about 5 MB)",
+        "Extras: pdf, drawings, media (with build plan pictures), release (gate, archive helper)",
+        "Python 3.11 or later; CI on Linux, macOS, Windows (WSL2), Python 3.11 and newest",
         "Viewer script bundled beside model.glb, so the viewer works offline (DDR-003)",
         "Value-engineering target USD 0; estimated cost USD 0",
     ], x=276, y=118, width=140)

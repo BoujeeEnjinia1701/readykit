@@ -3,7 +3,7 @@ doc_id: RDK-DDR-003
 title: ReadyKit design for construction
 project: ReadyKit
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -17,12 +17,16 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "A1 decided as (a) and A2 as (b) by Amish; P1 to P6 still open for his review"
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Table 1 changes (P1 to P6) accepted by Amish on 2026-10-02"
 ---
 
 # 0003: Design for construction
 
 - **Date:** 2026-10-01
-- **Status:** Draft. Every change below was made under Amish's 2026-09-30 instruction to make the design physically buildable; the changes P1 to P6 in Table 1 remain open for his review. The items in Table 3 were decided by Amish on 2026-10-02: "i approve your recommendations for all 555 open decisions." A1 is decided as (a); A2 is decided as (b), Python 3.11 or later, the later recommendation, since Python 3.10 reaches end of life in October 2026. Both are recorded in the design decisions register (RDK-DEC-001).
+- **Status:** accepted. Amish, 2026-10-02: "APPROVED: Design-for-construction changes in 10 repos (CityTwin, CoolShade, PalletPilot, Heliolite, PotholeLog, EarthPress, ReadyKit, CellCheck, CargoMule and ThermaCart)". This covers the changes P1 to P6 in Table 1, made under Amish's 2026-09-30 instruction to make the design physically buildable, and is recorded in the design decisions register (RDK-DEC-001). The items in Table 3 were decided by Amish earlier the same day: "i approve your recommendations for all 555 open decisions." A1 is decided as (a); A2 is decided as (b), Python 3.11 or later, the later recommendation, since Python 3.10 reaches end of life in October 2026. Both are recorded in the design decisions register (RDK-DEC-001).
 
 ## Context
 

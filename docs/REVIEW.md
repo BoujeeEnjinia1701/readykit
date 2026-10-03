@@ -299,14 +299,14 @@ Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." 
 5. Package scope (a): release gate and archive helper in the release extra, build plan pictures in the media extra, photoreal renders and storefront cards portfolio only (RDK-DDR-003, A1).
 6. Python 3.11 or later, tested in CI on 3.11 and the newest release (RDK-DDR-003, A2, option b; the register had recommended (a)).
 
-The design-for-construction changes P1 to P6 (RDK-DDR-003, Table 1) were not among the open decisions in the register and are not recorded as accepted; see "Points found in the review".
+The design-for-construction changes P1 to P6 (RDK-DDR-003, Table 1) were not among the open decisions in the register and were not recorded as accepted in this session; Amish accepted them later on 2026-10-02 (see the next session).
 
 ### Documents changed
 
 - `docs/06-design-decisions.md`: RDK-DEC-001 v0.2
 - `docs/decisions/0001-trl2-review-decisions.md`: RDK-DDR-001 v0.4
 - `docs/decisions/0002-recommendations-accepted.md`: RDK-DDR-002 v0.3
-- `docs/decisions/0003-design-for-construction.md`: RDK-DDR-003 v0.2 (A1 and A2 decided; status kept Draft, P1 to P6 still open)
+- `docs/decisions/0003-design-for-construction.md`: RDK-DDR-003 v0.2 (A1 and A2 decided; status kept Draft, P1 to P6 still open at that point)
 - `docs/02-concept.md`: RDK-PRC-001 v0.6 (open questions)
 - `docs/03-requirements.md`: RDK-REQ-001 v0.6 (R2 and R13 targets)
 - `docs/04-calcs/01-sizing.md`: RDK-CAL-001 v0.4 (requirement table targets; no figure changed)
@@ -323,6 +323,54 @@ The design-for-construction changes P1 to P6 (RDK-DDR-003, Table 1) were not amo
 
 ### Points found in the review
 
-- The design for construction changes P1 to P6 (DDR-003, Table 1) are still open for Amish's review, but the register has no row for accepting them. They should get one; the recommendation is to accept.
+- The design for construction changes P1 to P6 (DDR-003, Table 1) were still open for Amish's review, with no row in the register for accepting them; the recommendation was to accept. Amish accepted them later on 2026-10-02 (see the next session).
 - Item 1 says GitHub was not checked, but project.yaml already names the repository BoujeeEnjinia1701/readykit, so the GitHub name is in hand.
 - Python 3.10 reaches end of life in October 2026, which makes the register's recommendation for item 6 out of date as of this review.
+
+## Session 2026-10-02: design-for-construction changes accepted
+
+Amish, 2026-10-02: "APPROVED: Design-for-construction changes in 10 repos (CityTwin, CoolShade, PalletPilot, Heliolite, PotholeLog, EarthPress, ReadyKit, CellCheck, CargoMule and ThermaCart)". This accepts the design-for-construction changes P1 to P6 in Table 1 of RDK-DDR-003, which were left open for his review when the open decisions were decided earlier the same day. No other item is decided by it. trl stays 3; no build or test work was done, and the model, BOM, calculations and pictures are unchanged.
+
+### Documents changed
+
+- `docs/decisions/0003-design-for-construction.md` (RDK-DDR-003 v0.3, status Draft): status line now "accepted" with Amish's words.
+- `docs/06-design-decisions.md` (RDK-DEC-001 v0.3): Decisions made row added, dated 2026-10-02; the 2026-09-30 row no longer calls the changes open for review.
+- `docs/05-build-plan.md` (RDK-BLD-001 v0.3): section 2 says RDK-DDR-003 is accepted.
+- `README.md`: build plan paragraph says RDK-DDR-003 is accepted.
+- PDFs regenerated.
+
+### Recommended next step
+
+No change: the follow-up actions of the previous session stand. TRL 4 remains on hold by Amish's instruction.
+
+## Session 2026-10-02: approved follow-ups carried out
+
+Amish, 2026-10-02: every follow-up action from the open-decision sign-off is approved and to be completed. trl stays 3; no build or test work was done. `budget_usd` is unchanged.
+
+### Follow-ups
+
+1. Decision 1 (recheck the package index, publish the first release): not done: an action for Amish just before the first release, and publishing is his decision (CLAUDE.md section 7). The build plan already records the rule.
+2. Decision 2 (approach GOSH): not done: outreach by Amish; nothing is agreed.
+3. Decision 3 (Windows through WSL2 in CI): done in the design. The build plan (section 3.1, step 4), the template sketch RDK-DWG-101 Rev P2, joint 2 and the general arrangement name Linux, macOS and Windows through WSL2. This repository's own workflow `.github/workflows/docs.yml` is the portfolio's check workflow and stays Linux only; the three-platform workflow belongs to the package skeleton, which is TRL 4 work.
+4. Decision 4 (still-open phrase field): done. The model's identity card carries six field tabs, the sixth being the phrase; BOM lines 2 and 12 name it; RDK-DWG-102 Rev P2, RDK-DWG-104 Rev P2 and joint 4 show it with the default "Proposed, awaiting". Writing `readykit.yaml` itself is TRL 4 work.
+5. Decision 5 (extras and release gate): done. The tray has five bays (core and four extras), the general arrangement RDK-DWG-001 Rev P5 has a Package extras box, and the build plan text, section 3.1 sketch and step 2 picture show them; BOM line 10 names the release gate and archive helper in the release extra and the build plan pictures in the media extra.
+6. Decision 6 (Python 3.11 or later, CI on 3.11 and newest): done in the design and calculations (BOM line 7 and 10, RDK-DWG-101, build plan, RDK-CAL-001 G4). The package file that holds `requires-python` is TRL 4 work.
+
+### Results
+
+- Model: 89 constructability checks, 0 failures; STEP and STL regenerated; 9 objects.
+- BOM: no line added, removed or re-priced (all USD 0.00, basis unchanged: in-house MIT code and free open-source dependencies). Mass: not applicable, software.
+- Value-engineering target: USD 0. Estimated cost of the constructable design: USD 0 (USD 0 over the target).
+- Requirement status changes: none. R11 and R13 now count the still-open phrase as a sixth identity value; R2 names the CI matrix.
+- Calculations: `docs/04-calcs/sizing.py` section G added and run with `--design-only` (no timing changed, so A to F were not re-run); results.csv updated.
+- Pictures regenerated: RDK-DWG-001 Rev P5, RDK-DWG-101, 102 and 104 Rev P2, concept media (hero, exploded, blueprint Rev P5, viewer), overview, joints 1 to 7 and steps 1 to 10. `drawing.py --check-text` reports nothing.
+- Appearance model and render scenes: no `cad/src/product_model.py` was created, because ReadyKit is a software project and keeps its scene-style hero from `concept_media.py`; no scenes exported.
+
+### Documents changed
+
+RDK-BLD-001 v0.4, RDK-REQ-001 v0.7, RDK-CAL-001 v0.5, RDK-DEC-001 v0.4, with `bom/bom.csv`, `bom/bom-notes.md`, `cad/src/model.py`, `cad/src/sheets.py`, `cad/src/build_plan_media.py`, `cad/src/concept_media.py`. PDFs regenerated.
+
+### Cross-repo actions
+
+- The portfolio kit (`.kit/render.py`, the template) should read the still-open phrase from each repository's identity file; every repository that carries R13 wording is affected.
+- GOSH outreach (decision 2) is Amish's.
